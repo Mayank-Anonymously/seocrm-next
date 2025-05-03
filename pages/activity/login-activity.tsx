@@ -19,9 +19,7 @@ import Breadcrumb from '@common/Breadcrumb';
 const LoginActivity = () => {
 	const dispatch: any = useDispatch();
 	const [filteredData, setFilteredData] = useState<any>([]);
-	const { layoutModeType } = useSelector((state: any) => ({
-		layoutModeType: state.Layout.layoutModeType,
-	}));
+
 	const { activitydata, isLoading } = useSelector(
 		(state: any) => state.activityFeed
 	);
@@ -118,9 +116,7 @@ const LoginActivity = () => {
 							/>
 						}
 						persistTableHead
-						theme={
-							layoutModeType === LAYOUT_MODE_TYPES.DARKMODE ? 'dark' : 'default'
-						}
+						theme={'default'}
 					/>
 				</Container>
 			</div>

@@ -24,9 +24,6 @@ const ViewUser = () => {
 	}));
 	var rows: any = [];
 
-	const { layoutModeType } = useSelector((state: any) => ({
-		layoutModeType: state.Layout.layoutModeType,
-	}));
 	/* ------------------------------------------Adding Elements To Array-------------------------------- */
 	console.log(userdata);
 	for (let index = 0; index < userdata.length; index++) {
@@ -152,11 +149,7 @@ const ViewUser = () => {
 								/>
 							}
 							persistTableHead
-							theme={
-								layoutModeType === LAYOUT_MODE_TYPES.DARKMODE
-									? 'dark'
-									: 'default'
-							}
+							theme={'default'}
 						/>
 					)}
 				</Container>

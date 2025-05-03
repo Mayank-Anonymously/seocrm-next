@@ -78,10 +78,6 @@ export const Material = (props: any) => {
 		}
 	}, []);
 
-	const { layoutModeType } = useSelector((state: any) => ({
-		layoutModeType: state.Layout.layoutModeType,
-	}));
-
 	const darkTheme = createTheme({
 		palette: {
 			mode: 'dark',
@@ -419,13 +415,7 @@ export const Material = (props: any) => {
 	});
 	return (
 		<>
-			{layoutModeType === LAYOUT_MODE_TYPES.DARKMODE ? (
-				<ThemeProvider theme={darkTheme}>
-					<CssBaseline /> <MaterialReactTable table={table} />
-				</ThemeProvider>
-			) : (
-				<MaterialReactTable table={table} />
-			)}
+			<MaterialReactTable table={table} />
 		</>
 	);
 };

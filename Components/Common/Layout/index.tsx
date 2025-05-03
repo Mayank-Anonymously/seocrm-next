@@ -55,48 +55,11 @@ const Layout = ({ children }: any) => {
 	}, []);
 
 	const dispatch: any = useDispatch();
-	const {
-		layoutModeType,
-		layoutWidthType,
-		layoutPositionType,
-		topbarThemeType,
-		leftsidbarSizeType,
-		leftSidebarViewType,
-		leftSidebarImageType,
-	} = useSelector((state: any) => ({
-		layoutModeType: state.Layout.layoutModeType,
-		layoutWidthType: state.Layout.layoutWidthType,
-		layoutPositionType: state.Layout.layoutPositionType,
-		topbarThemeType: state.Layout.topbarThemeType,
-		leftsidbarSizeType: state.Layout.leftsidbarSizeType,
-		leftSidebarViewType: state.Layout.leftSidebarViewType,
-		leftSidebarImageType: state.Layout.leftSidebarImageType,
-	}));
 
 	/*
     layout settings
     */
-	useEffect(() => {
-		if (
-			layoutModeType ||
-			layoutWidthType ||
-			layoutPositionType ||
-			topbarThemeType ||
-			leftsidbarSizeType ||
-			leftSidebarViewType ||
-			leftSidebarImageType
-		) {
-		}
-	}, [
-		layoutModeType,
-		layoutWidthType,
-		layoutPositionType,
-		topbarThemeType,
-		leftsidbarSizeType,
-		leftSidebarViewType,
-		leftSidebarImageType,
-		dispatch,
-	]);
+
 	return (
 		<React.Fragment>
 			<>
