@@ -23,8 +23,8 @@ let users = [
     uid: 1,
     username: "Admin",
     role: "Admin",
-    password: "1234567",
-    email: "admin@njhousing.com",
+    password: "123456",
+    email: "admin@themesbrand.com",
   },
 ];
 

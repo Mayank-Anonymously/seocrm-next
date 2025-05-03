@@ -275,7 +275,7 @@ const contactData = [
     id: 27,
     img: avatar10,
     name: "Tonya Noble",
-    email: "tonyanoble@Lavya.com",
+    email: "tonyanoble@.com",
     phone: "+(34) 414 453 5725",
     country: "Germany",
     label: "Business",

@@ -74,7 +74,7 @@ const simplePageProjectData = [
   {
     id: 4,
     companyLogo: companyImg5,
-    title: "Lavya Project",
+    title: " Project",
     lastUpdate: "11 year Ago",
     members: [
       { id: 1, img: avatar2 },
@@ -651,31 +651,31 @@ const basicTeamExampleData = [
     id: 1,
     img: avatar9,
     name: "Jordan Martino",
-    email: "jordan.martino@Lavya.com",
+    email: "jordan.martino@.com",
   },
   {
     id: 2,
     img: avatar10,
     name: "Nancy Martino",
-    email: "nancy.martino@Lavya.com",
+    email: "nancy.martino@.com",
   },
   {
     id: 3,
     img: avatar1,
     name: "Pieter Novitsky",
-    email: "pieter.novitsky@Lavya.com",
+    email: "pieter.novitsky@.com",
   },
   {
     id: 4,
     img: avatar9,
     name: "Allyson Booker",
-    email: "allyson.booker@Lavya.com",
+    email: "allyson.booker@.com",
   },
   {
     id: 5,
     img: avatar3,
     name: "Cristofer Leblanc",
-    email: "cristofer.leblanc@Lavya.com",
+    email: "cristofer.leblanc@.com",
   },
 ];
 

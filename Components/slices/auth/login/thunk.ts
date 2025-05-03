@@ -7,55 +7,50 @@ import {
 } from "../../../helpers/fakebackend_helper";
 
 import { loginSuccess, logoutUserSuccess, apiError, reset_login_flag } from './reducer';
+import { baseURL } from "Components/helpers/url_helper";
 
 const fireBaseBackend = getFirebaseBackend();
 
-export const loginUser = (user: any, router : any) => async (dispatch: any) => {
-
-  try {
-    let response;
-    if (process.env.NEXT_PUBLIC_DEFAULTAUTH === "firebase") {
-      let fireBaseBackend = getFirebaseBackend();
-      response = fireBaseBackend.loginUser(
-        user.email,
-        user.password
-      );
-    } else if (process.env.NEXT_PUBLIC_DEFAULTAUTH === "jwt") {
-      response = postJwtLogin({
-        email: user.email,
-        password: user.password
-      });
-
-    } else if (process.env.NEXT_PUBLIC_API_URL) {
-      response = postFakeLogin({
+export const loginUser = (user: any, router: any) => async (dispatch: any) => {
+  // try {
+    const response = await fetch(`${baseURL}/auth/login/crm`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
         email: user.email,
         password: user.password,
-      });
+      }),
+    });
 
+    const data = await response.json();
+    console.log(data);
+   
+    if (data.status) {
+      localStorage.setItem('authUser', JSON.stringify( {
+        uid: 1,
+        username: "Admin",
+        role: "Admin",
+        password: data.password,
+        email: data.email,
+      },));
+      dispatch(loginSuccess({
+        uid: 1,
+        username: "Admin",
+        role: "Admin",
+        password: data.password,
+        email: data.email,
+      }));
+      router.push('/dashboard', undefined, { shallow: true });
+    } else {
+      dispatch(apiError(data.message || 'Login failed'));
     }
-
-    var data = await response;
-    if (data) {
-      localStorage.setItem("authUser", JSON.stringify(data));
-      if (process.env.NEXT_PUBLIC_DEFAULTAUTH === "fake") {
-        var finallogin: any = JSON.stringify(data);
-        finallogin = JSON.parse(finallogin)
-        data = finallogin.data;
-        if (finallogin.username && finallogin.password) {
-          dispatch(loginSuccess(data));
-           router.push('/dashboard', undefined, { shallow: true })
-        } else {
-          dispatch(apiError(finallogin));
-        }
-      } else {
-        dispatch(loginSuccess(data));
-         router.push('/dashboard', undefined, { shallow: true })
-      }
-    }
-  } catch (error) {
-    dispatch(apiError(error));
-  }
+  // } catch (error: any) {
+  //   dispatch(apiError(error.message || 'Something went wrong'));
+  // }
 };
+
 
 export const logoutUser = () => async (dispatch: any) => {
   try {

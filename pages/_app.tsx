@@ -1,16 +1,16 @@
-import "../Components/assets/scss/themes.scss";
-import React, { ReactElement, ReactNode } from "react";
-import Head from "next/head";
-import { Provider } from "react-redux";
-import { wrapper } from "../Components/slices";
+import '../Components/assets/scss/themes.scss';
+import React, { ReactElement, ReactNode } from 'react';
+import Head from 'next/head';
+import { Provider } from 'react-redux';
+import { wrapper } from '../Components/slices';
 
 import {
-  AppContext,
-  AppInitialProps,
-  AppLayoutProps,
-  AppProps,
-} from "next/app";
-import type { NextComponentType, NextPage } from "next";
+	AppContext,
+	AppInitialProps,
+	AppLayoutProps,
+	AppProps,
+} from 'next/app';
+import type { NextComponentType, NextPage } from 'next';
 
 // Import Firebase Configuration file
 // import { initFirebaseBackend } from "Components/helpers/firebase_helper";
@@ -30,41 +30,41 @@ import type { NextComponentType, NextPage } from "next";
 // initFirebaseBackend(firebaseConfig);
 
 // Fake backend
-import fakeBackend from "Components/helpers/AuthType/fakeBackend";
+import fakeBackend from 'Components/helpers/AuthType/fakeBackend';
 
 // Activating fake backend
 fakeBackend();
 
 type NextPageWithLayout = NextPage & {
-  getLayout?: (page: ReactElement) => ReactNode;
+	getLayout?: (page: ReactElement) => ReactNode;
 };
 
 type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
+	Component: NextPageWithLayout;
 };
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
-  Component,
-  pageProps,
-  ...rest
+	Component,
+	pageProps,
+	...rest
 }: AppPropsWithLayout) => {
-  const { store } = wrapper.useWrappedStore(rest);
-  const getLayout = Component.getLayout || ((page) => page);
+	const { store } = wrapper.useWrappedStore(rest);
+	const getLayout = Component.getLayout || ((page) => page);
 
-  return (
-    <>
-      <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+	return (
+		<>
+			<Head>
+				<meta
+					name='viewport'
+					content='width=device-width, initial-scale=1, shrink-to-fit=no'
+				/>
 
-        <title>Lavya | Next js & Admin Dashboard </title>
-      </Head>
-      <Provider store={store}>
-        {getLayout(<Component {...pageProps} />)}
-      </Provider>
-    </>
-  );
+				<title> | Next js & Admin Dashboard </title>
+			</Head>
+			<Provider store={store}>
+				{getLayout(<Component {...pageProps} />)}
+			</Provider>
+		</>
+	);
 };
 
 export default MyApp;

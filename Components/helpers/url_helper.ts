@@ -3,8 +3,8 @@
 // export const imagebaseURL = "http://18.204.165.219:9291/resources/";
 
 // // // LIVE;
-// export const baseURL = "https://api.mylavya.com/api/v1";
-export const imagebaseURL = "https://api.mylavya.com/resources/";
+// export const baseURL = "https://api.my.com/api/v1";
+export const imagebaseURL = "https://api.my.com/resources/";
 export const baseURL = "https://real-back-tau.vercel.app";
 
 // LOCAL;

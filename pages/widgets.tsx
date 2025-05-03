@@ -22,7 +22,7 @@ const Widgets = () => {
 	return (
 		<React.Fragment>
 			<Head>
-				<title>Widgets | Lavya -Admin </title>
+				<title>Widgets | -Admin </title>
 			</Head>
 			<div className='page-content'></div>
 		</React.Fragment>
