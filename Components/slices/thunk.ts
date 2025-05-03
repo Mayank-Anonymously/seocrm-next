@@ -15,4 +15,3 @@ export { editProfile, resetProfileFlag } from "./auth/profile/thunk";
 
 
 
-export { fetchAllAssignedVms } from "./vms/thunk";

@@ -13,7 +13,6 @@ import LoginReducer from "./auth/login/reducer";
 import AccountReducer from "./auth/register/reducer";
 import ForgetPasswordReducer from "./auth/forgetpwd/reducer";
 import ProfileReducer from "./auth/profile/reducer";
-import vmsSlice from "./vms/reducers";
 import userSlice from "./user/reducers";
 import managerSlice from "./auth/manager/reducer";
 import customerQuery from "./client/reducer";
@@ -25,7 +24,6 @@ const combinedReducer = combineReducers({
   ForgetPassword: ForgetPasswordReducer,
   Profile: ProfileReducer,
 
-  VMS: vmsSlice,
   user: userSlice,
   
   managerFeed: managerSlice,
