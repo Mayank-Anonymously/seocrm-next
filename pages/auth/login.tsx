@@ -19,20 +19,12 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 
-//Social Media Imports
-import { GoogleLogin } from 'react-google-login';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 
-//import images
-import logoLightFull from '@assets/images/logob.png';
-import authEffect2 from '@assets/images/effect-pattern/auth-effect-2.png';
-import authEffect from '@assets/images/effect-pattern/auth-effect.png';
 import NonAuthLayout from '@common/Layout/NonAuthLayout';
 
 import { loginUser, resetLoginFlag } from 'Components/slices/auth/login/thunk';
@@ -89,29 +81,7 @@ const Login = () => {
 										<Col lg={5}>
 											<Card className='auth-card bg-primary h-100 border-0 shadow-none p-sm-3 overflow-hidden mb-0'>
 												<Card.Body className='p-4 d-flex justify-content-between flex-column'>
-													<div className='auth-image mb-3'>
-														<Image
-															src={logoLightFull}
-															alt=''
-															height='46'
-														/>
-														<Image
-															src={authEffect2}
-															alt=''
-															className='auth-effect-2'
-															priority
-														/>
-														<Image
-															src={authEffect}
-															alt=''
-															className='auth-effect'
-														/>
-														<Image
-															src={authEffect}
-															alt=''
-															className='auth-effect-3'
-														/>
-													</div>
+													<div className='auth-image mb-3'></div>
 
 													<div>
 														<h3 className='text-white'>
@@ -124,9 +94,8 @@ const Login = () => {
 													</div>
 													<div className='text-center text-white-75'>
 														<p className='mb-0'>
-															©{new Date().getFullYear()} Midas. Crafted with{' '}
+															©{new Date().getFullYear()} Crafted with{' '}
 															<i className='mdi mdi-heart text-danger'></i> by
-															Midas Tech
 														</p>
 													</div>
 												</Card.Body>
@@ -140,9 +109,7 @@ const Login = () => {
 														<h5 className='text-primary fs-20'>
 															Welcome Back !
 														</h5>
-														<p className='text-muted'>
-															Sign in to continue to Midas.
-														</p>
+														<p className='text-muted'>Sign in to continue</p>
 													</div>
 													{error && error ? (
 														<Alert variant='danger'> {error} </Alert>
