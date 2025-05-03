@@ -29,26 +29,21 @@ export const UserLogin = (user: any, router: any) => async (dispatch: any) => {
       data: { email: user.email, password: user.password },
     };
     const response: any = await axios.request(options);
-    if (response.status === "success") {
-      document.cookie = `authUser=${JSON.stringify(response.user)}; path=/`;
-      document.cookie = `token=${JSON.stringify(response.response)}; path=/`;
-      document.cookie = `currentrole=${JSON.stringify(
-        response.user.roles
-      )}; path=/`;
-      document.cookie = `id=${JSON.stringify(response.user.id)}; path=/`;
-      localStorage.setItem("authUser", JSON.stringify(response.user));
-      localStorage.setItem("token", JSON.stringify(response.response));
-      localStorage.setItem("currentrole", JSON.stringify(response.user.roles));
-      localStorage.setItem("id", JSON.stringify(response.user.id));
 
-      if (response.user.email && response.user.password) {
-        dispatch(loginSuccess(response.user));
+    if (response.status === "success") {
+      document.cookie = `authUser=${JSON.stringify(response)}; path=/`;
+      document.cookie = `id=${JSON.stringify(response._id)}; path=/`;
+      localStorage.setItem("authUser", JSON.stringify(response));
+    localStorage.setItem("id", JSON.stringify(response.id));
+
+      if (response.email && response.password) {
+        dispatch(loginSuccess(response));
         router.push("/dashboard", undefined, { shallow: true });
       } else {
-        dispatch(apiError(response.response));
+        dispatch(apiError(response));
       }
     } else {
-      dispatch(apiError(response.response));
+      dispatch(apiError(response));
     }
     return response;
   } catch (error) {

@@ -28,13 +28,12 @@ import assignSlice from "./jobs/_assigned/reducers";
 import statSlice from "./stats/reducers";
 import calcSlice from "./calculator/reducers";
 import managerSlice from "./auth/manager/reducer";
-import clientHRMSSlice from "./client/reducer";
+import customerQuery from "./client/reducer";
 import employeeSlice from "./employee/reducers";
 import projectSlice from "./project/reducer";
 import facilitySlice from "./facility/reducer";
 import organisationSlice from "./organisation/reducer";
 import activitySlice from "./activity/reducer";
-import pipeSlice from "./pipeline/reducer";
 
 const combinedReducer = combineReducers({
   Layout: LayoutReducer,
@@ -55,13 +54,13 @@ const combinedReducer = combineReducers({
   calc: calcSlice,
   assignFeed: assignSlice,
   managerFeed: managerSlice,
-  client: clientHRMSSlice,
+  customer: customerQuery,
   employee: employeeSlice,
   project: projectSlice,
   facility: facilitySlice,
   organisationdata: organisationSlice,
   activityFeed: activitySlice,
-  pipelineFeed: pipeSlice,
+
 });
 
 export const store = configureStore({

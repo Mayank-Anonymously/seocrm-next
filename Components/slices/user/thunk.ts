@@ -22,7 +22,6 @@ import {
 import Factory from "Components/APIFactory/Factory";
 import Swal from "sweetalert2";
 import { apiError } from "../auth/login/reducer";
-import { fetchPipelineByIdOfManager } from "../pipeline/thunk";
 export const fetchAllUser = () => async (dispatch: any) => {
   var rolesArray: any = [];
 
@@ -30,112 +29,7 @@ export const fetchAllUser = () => async (dispatch: any) => {
     dispatch(api_is_userdata_loading(true));
     const fetch_api = axios.get(`${hrms_api_host}${GET_ALL_USER}`);
     const data: any = await fetch_api;
-    dispatch(api_is_userdata_success(data));
-    if (localStorage.getItem("authUser")) {
-      const obj: any = JSON.parse(localStorage.getItem("authUser") || "");
-      const currentrole: any = JSON.parse(
-        localStorage.getItem("currentrole") || ""
-      );
-      var id: any = "";
-      var RecruiTmanagerId: any = [];
-      const uniqueArray: any = [];
-      var idsArray: any = [];
-
-      if (currentrole[0].role === "GENERALMANAGER") {
-        console.log("GENMGR for Pipeline");
-        var rolesArray: any = [];
-
-        for (let index = 0; index < data.length; index++) {
-          const element = data[index];
-
-          for (var role of element.roles) {
-            rolesArray.push({
-              ...element,
-              roles: role === null ? "" : role.id,
-              managerId: element.manager === null ? "" : element.manager.id,
-            });
-          }
-        }
-        var amIdArray: any = [];
-        rolesArray
-          .filter((ite: any) => ite.managerId === obj.id)
-          .map((item: any) => amIdArray.push(item.id));
-
-        var tlIdArray: any = [];
-
-        for (let index = 0; index < amIdArray.length; index++) {
-          const element = amIdArray[index];
-          rolesArray
-            .filter((ite: any, index: any) => ite.managerId === element)
-            .map((item: any) => tlIdArray.push(item.id));
-        }
-
-        var RecruiterId: any = [];
-
-        for (let index = 0; index < tlIdArray.length; index++) {
-          const element = tlIdArray[index];
-          rolesArray
-            .filter((ite: any, index: any) => ite.managerId === element)
-            .map((item: any) => RecruiterId.push(item.id));
-        }
-
-        idsArray.push(...amIdArray, ...tlIdArray, ...RecruiterId);
-        dispatch(fetchPipelineByIdOfManager(idsArray));
-        return idsArray;
-      } else if (currentrole[0].role === "ACCOUNTMANAGER") {
-        var rolesArray: any = [];
-
-        for (let index = 0; index < data.length; index++) {
-          const element = data[index];
-
-          for (var role of element.roles) {
-            rolesArray.push({
-              ...element,
-              roles: role === null ? "" : role.id,
-              managerId: element.manager === null ? "" : element.manager.id,
-            });
-          }
-        }
-        var tlIdArray: any = [];
-        rolesArray
-          .filter((ite: any) => ite.managerId === obj.id)
-          .map((item: any) => tlIdArray.push(item.id));
-
-        var RecruiterId: any = [];
-
-        for (let index = 0; index < tlIdArray.length; index++) {
-          const element = tlIdArray[index];
-          rolesArray
-            .filter((ite: any, index: any) => ite.managerId === element)
-            .map((item: any) => RecruiterId.push(item.id));
-        }
-
-        idsArray.push(...tlIdArray, ...RecruiterId);
-        return dispatch(fetchPipelineByIdOfManager(idsArray));
-      } else {
-        var rolesArray: any = [];
-
-        for (let index = 0; index < data.length; index++) {
-          const element = data[index];
-
-          for (var role of element.roles) {
-            rolesArray.push({
-              ...element,
-              roles: role === null ? "" : role.id,
-              managerId: element.manager === null ? "" : element.manager.id,
-            });
-          }
-        }
-        var RecruiterId: any = [];
-
-        rolesArray
-          .filter((ite: any) => ite.managerId === obj.id)
-          .map((item: any) => RecruiterId.push(item.id));
-
-        idsArray.push(...RecruiterId);
-        return dispatch(fetchPipelineByIdOfManager(RecruiterId));
-      }
-    }
+    dispatch(api_is_userdata_success(data.user));
     return data;
   } catch (error) {
     dispatch(api_is_userdata_error(error));
@@ -155,6 +49,7 @@ export const fetchAllRoles = () => async (dispatch: any) => {
     dispatch(api_is_userdata_error(error));
   }
 };
+
 export const fetchUserByManagerId = (id: any) => async (dispatch: any) => {
   try {
     var setter: any = [];
@@ -169,6 +64,7 @@ export const fetchUserByManagerId = (id: any) => async (dispatch: any) => {
     dispatch(api_is_userdata_error(error));
   }
 };
+
 export const AddNewUser =
   (values: any, router: any) => async (dispatch: any) => {
     try {

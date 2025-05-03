@@ -3,29 +3,30 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isLoading: false,
   isError: "",
-  clientdata: <any>[],
+  customerQuery: <any>[],
   roles: <any>[],
   selectedclient: <any>{},
 };
 
-const clientHRMSSlice = createSlice({
-  name: "clientHRMSSlice",
+const customerQuery = createSlice({
+  name: "customerQuery",
   initialState,
   reducers: {
-    api_is_clientdata_loading(state, action) {
+    api_is_customerQuery_loading(state, action) {
       state.isLoading = action.payload;
       state.isError = "";
-      state.clientdata = [];
+      state.customerQuery = [];
     },
-    api_is_clientdata_error(state, action) {
+    api_is_customerQuery_error(state, action) {
       state.isLoading = false;
       state.isError = action.payload;
-      state.clientdata = [];
+      state.customerQuery = [];
     },
-    api_is_clientdata_success(state, action) {
+    api_is_customerQuery_success(state, action) {
+      console.log(action.payload);
       state.isLoading = false;
       state.isError = "";
-      state.clientdata = action.payload.payload;
+      state.customerQuery = action.payload;
     },
     is_client_selected_success(state, action) {
       state.isLoading = false;
@@ -36,9 +37,9 @@ const clientHRMSSlice = createSlice({
 });
 
 export const {
-  api_is_clientdata_loading,
-  api_is_clientdata_error,
-  api_is_clientdata_success,
+  api_is_customerQuery_loading,
+  api_is_customerQuery_error,
+  api_is_customerQuery_success,
   is_client_selected_success,
-} = clientHRMSSlice.actions;
-export default clientHRMSSlice.reducer;
+} = customerQuery.actions;
+export default customerQuery.reducer;

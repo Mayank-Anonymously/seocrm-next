@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+/* import React, { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
 import { user } from "Components/interface/user";
 const Navdata = () => {
@@ -513,7 +513,7 @@ const Navdata = () => {
               {
                 id: "client",
                 label: "Client-Jobs",
-                link: `/jobs/client/${userdetails.id}`,
+                link: `/jobs/client/${userdetails._pid}`,
                 click: function (e: any) {
                   e.preventDefault();
                   setIsSignIn(!isSignIn);
@@ -975,5 +975,186 @@ const Navdata = () => {
         ]
       : [];
   return <React.Fragment>{menuItems}</React.Fragment>;
+};
+export default Navdata;
+ */
+import React, { useEffect, useState } from 'react';
+import Router, { useRouter } from 'next/router';
+import { user } from 'Components/interface/user';
+const Navdata = () => {
+	const router = useRouter();
+	// state data
+	const [isAuth, setIsAuth] = useState(false);
+	const [isJobs, setIsJobs] = useState(false);
+	const [hrms, setHrms] = useState(false);
+	const [isPages, setIsPages] = useState(false);
+	const [isMultiLevel, setIsMultiLevel] = useState(false);
+	const [isVms, setIsVms] = useState(false);
+	const [isStats, setIsStats] = useState(false);
+	const [isActivity, setIsActivity] = useState(false);
+	const [isOrganisation, setIsOrganisation] = useState(false);
+	const [isEmployee, setIsEmployee] = useState(false);
+
+	const [isClient, setIsClient] = useState(false);
+	const [isFacility, setIsFacility] = useState(false);
+	const [user, setUser] = useState(false);
+	//  Authentication
+	const [isSignIn, setIsSignIn] = useState(false);
+	const [isSignUp, setIsSignUp] = useState(false);
+	const [isPasswordReset, setIsPasswordReset] = useState(false);
+	const [isPasswordCreate, setIsPasswordCreate] = useState(false);
+	const [isLockScreen, setIsLockScreen] = useState(false);
+	const [isLogout, setIsLogout] = useState(false);
+	const [isSuccessMessage, setIsSuccessMessage] = useState(false);
+	const [isVMSHrms, setIsVMSHRMS] = useState(false);
+	const [isPipeline, setIsPipeline] = useState(false);
+	const [isError, setIsError] = useState(false);
+	const [userObj, setUserobj] = useState<any>({});
+	//  Pages
+	const [isProfile, setIsProfile] = useState(false);
+
+	//  Multi Level
+	const [isLevel1, setIsLevel1] = useState(false);
+	const [isLevel2, setIsLevel2] = useState(false);
+	const [userdetails, setUserDetails] = useState<any>('');
+	const [isCurrentState, setIsCurrentState] = useState('');
+
+	function updateIconSidebar(e: any) {
+		if (e && e.target && e.target.getAttribute('sub-items')) {
+			const ul: any = document.getElementById('two-column-menu');
+			const iconItems: any = ul.querySelectorAll('.nav-icon.active');
+			let activeIconItems = [...iconItems];
+			activeIconItems.forEach((item) => {
+				item.classList.remove('active');
+				var id: any = item.getAttribute('sub-items');
+				var menusId = document.getElementById(id);
+				if (menusId) {
+					(menusId.parentElement as HTMLElement).classList.remove('show');
+				}
+			});
+			e.target.classList.add('active');
+		}
+	}
+
+	useEffect(() => {
+		if (localStorage.getItem('authUser')) {
+			const obj: any = JSON.parse(localStorage.getItem('authUser') || '');
+			setUserDetails(obj);
+		}
+		document.body.classList.remove('twocolumn-panel');
+		if (isCurrentState !== 'Auth') {
+			setIsAuth(false);
+		}
+		if (isCurrentState !== 'Pages') {
+			setIsPages(false);
+		}
+		if (isCurrentState !== 'MuliLevel') {
+			setIsMultiLevel(false);
+		}
+		if (isCurrentState === 'Dashboard') {
+			Router.push('/dashboard');
+			document.body.classList.add('twocolumn-panel');
+		}
+		if (isCurrentState === 'Widgets') {
+			Router.push('/widgets');
+			document.body.classList.add('twocolumn-panel');
+		}
+		if (isCurrentState === 'Calendar') {
+			Router.push('/calendar');
+			document.body.classList.add('twocolumn-panel');
+		}
+		if (isCurrentState === 'API Key') {
+			Router.push('/api-key');
+			document.body.classList.add('twocolumn-panel');
+		}
+		if (isCurrentState === 'Contact') {
+			Router.push('/contact');
+			document.body.classList.add('twocolumn-panel');
+		}
+		if (isCurrentState === 'Leaderboard') {
+			Router.push('/leaderboard');
+			document.body.classList.add('twocolumn-panel');
+		}
+		if (isCurrentState === 'Components') {
+			Router.push('https:hybrix-nextjs-components.vercel.app/');
+			document.body.classList.add('twocolumn-panel');
+		}
+		if (localStorage.getItem('currentrole')) {
+			const obj: any = JSON.parse(localStorage.getItem('currentrole') || '{}');
+			setUserobj(obj[0]);
+		}
+	}, [isCurrentState, isAuth, isPages, isMultiLevel]);
+	const menuItems: any = [
+		{
+			id: 'dashboard',
+			label: 'Dashboard',
+			icon: 'bi bi-speedometer2',
+			link: '/dashboard',
+			click: function (e: any) {
+				e.preventDefault();
+				setIsCurrentState('Dashboard');
+			},
+		},
+
+		{
+			label: 'HRMS',
+			isHeader: true,
+		},
+		{
+			id: 'user',
+			label: 'Users',
+			icon: 'bi bi-person-circle ',
+			link: '/#',
+			click: function (e: any) {
+				e.preventDefault();
+				setUser(!user);
+				setIsCurrentState('User');
+				updateIconSidebar(e);
+			},
+			stateVariables: user,
+			subItems: [
+				{
+					id: 'viewuser',
+					label: 'View-Users',
+					link: '/users/view-user',
+					click: function (e: any) {
+						e.preventDefault();
+						setIsSignUp(!isSignUp);
+					},
+					parentId: 'user',
+					stateVariables: isSignUp,
+				},
+			],
+		},
+
+		{
+			id: 'client',
+			label: 'Clients',
+			icon: 'bi bi-clipboard-data',
+			link: '/#',
+			click: function (e: any) {
+				e.preventDefault();
+				setIsClient(!isClient);
+				setIsCurrentState('Stats');
+				updateIconSidebar(e);
+			},
+			stateVariables: isClient,
+			subItems: [
+				{
+					id: 'viewClient',
+					label: 'View Client',
+					link: '/client/view-client',
+					click: function (e: any) {
+						e.preventDefault();
+						setIsSignIn(!isSignIn);
+					},
+					parentId: 'client',
+					stateVariables: isSignIn,
+				},
+			],
+		},
+	];
+
+	return <React.Fragment>{menuItems}</React.Fragment>;
 };
 export default Navdata;

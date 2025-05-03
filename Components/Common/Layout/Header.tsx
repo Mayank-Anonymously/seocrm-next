@@ -117,11 +117,7 @@ const Header = () => {
                 </button>
               </div>
 
-              {/* <BrowseAppsDropdown /> */}
 
-              {/* <MyCartDropdown /> */}
-
-              {/* FullScreenDropdown */}
               <Zoomframe />
 
               <FullScreenDropdown />
@@ -169,7 +165,7 @@ const Header = () => {
               {/* <NotificationDropdown /> */}
 
               {/* ProfileDropdown */}
-              <ProfileDropdown />
+              {/* <ProfileDropdown /> */}
             </div>
           </div>
         </div>

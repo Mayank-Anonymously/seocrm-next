@@ -1,142 +1,148 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import Head from "next/head";
-import Layout from "@common/Layout";
-import Breadcrumb from "@common/Breadcrumb";
-import { Container } from "react-bootstrap";
-import moment from "moment";
-import DataTable from "react-data-table-component";
-import Custom_Filter from "@common/utils/filter/filter_utils";
-import { useDispatch, useSelector } from "react-redux";
-import { deteleClient, fetchClient } from "Components/slices/client/thunk";
-import { useRouter } from "next/router";
-import { is_client_selected_success } from "Components/slices/client/reducer";
-import Loader2 from "@common/Loader2";
-import { deleteVMS } from "Components/slices/vms/thunk";
-import Swal from "sweetalert2";
+import React, { ReactElement, useEffect, useState } from 'react';
+import Head from 'next/head';
+import Layout from '@common/Layout';
+import Breadcrumb from '@common/Breadcrumb';
+import { Container } from 'react-bootstrap';
+import DataTable from 'react-data-table-component';
+import Custom_Filter from '@common/utils/filter/filter_utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchQueries } from 'Components/slices/client/thunk';
+import { useRouter } from 'next/router';
+import Loader2 from '@common/Loader2';
+import Swal from 'sweetalert2';
+import moment from 'moment';
 
 const ViewClient = () => {
-  const router = useRouter();
-  const dispatch: any = useDispatch();
-  const { clientdata } = useSelector((state: any) => state.client);
-  const [filteredData, setFilteredData] = useState<any>([]);
-  const [currentRole, setCurrentRole] = useState<any>([]);
+	const router = useRouter();
+	const dispatch: any = useDispatch();
+	const { customerQuery } = useSelector((state: any) => state.customer);
+	const [filteredData, setFilteredData] = useState<any>([]);
+	const [currentRole, setCurrentRole] = useState<any>({});
 
-  const { isLoading } = useSelector((state: any) => ({
-    isLoading: state.client.isLoading,
-  }));
+	const { isLoading } = useSelector((state: any) => ({
+		isLoading: state.customer.isLoading,
+	}));
 
-  const columns: any = [
-    {
-      name: "Client Name",
-      id: "name",
-      selector: (row: any) => row.name,
-      sortable: true,
-    },
-    {
-      name: "Email",
-      id: "email",
-      selector: (row: any) => row.email,
-      sortable: true,
-    },
-    {
-      name: "Address",
-      id: "address",
-      selector: (row: any) => row.address,
-      sortable: true,
-    },
-    {
-      name: "Contact Person",
-      id: "contactPerson",
-      selector: (row: any) => row.contactPerson,
-      sortable: true,
-    },
-    {
-      name: "Action",
-      id: "action",
-      sortable: true,
-      width: "100px",
-      cell: (row: any) => (
-        <>
-          <span
-            className="cursor-pointer"
-            onClick={() => {
-              dispatch(is_client_selected_success(row));
-              router.push(`/client/edit-client`);
-            }}
-          >
-            <i className="bi bi-pencil-square"></i>
-          </span>
-          {currentRole.role === "SUPERADMIN" && (
-            <span
-              className="cursor-pointer"
-              title="Delete"
-              onClick={() => {
-                Swal.fire({
-                  title: "Delete Client?",
-                  text: `Are you sure you want to delete the client?`,
-                  showCancelButton: true,
-                  showCloseButton: true,
-                }).then((results) => {
-                  if (results.isConfirmed) {
-                    dispatch(deteleClient(row.id));
-                  }
-                });
-              }}
-            >
-              <i
-                style={{ fontSize: "18px", color: "red", marginLeft: "15px" }}
-                className="bi bi-trash"
-              ></i>
-            </span>
-          )}
-        </>
-      ),
-    },
-  ];
 
-  useEffect(() => {
-    if (localStorage.getItem("currentrole")) {
-      var currentRole = JSON.parse(localStorage.getItem("currentrole") || "");
-      setCurrentRole(currentRole[0]);
-    }
-    dispatch(fetchClient());
-  }, []);
+  console.log(customerQuery);
+	const columns = [
+		{
+			name: 'Title',
+			selector: (row: any) => row.title,
+			sortable: true,
+		},
+		{
+			name: 'Name',
+			selector: (row: any) => row.name,
+			sortable: true,
+		},
+		{
+			name: 'Email',
+			selector: (row: any) => row.email,
+			sortable: true,
+		},
+		{
+			name: 'Contact Number',
+			selector: (row: any) => row.contactNo,
+			sortable: true,
+		},
+		{
+			name: 'Address',
+			selector: (row: any) => row.address,
+			sortable: true,
+		},
+		{
+			name: 'Query',
+			selector: (row: any) => row.query,
+			sortable: false,
+		},
+		{
+			name: 'Created At',
+			selector: (row: any) => moment(row.createdAt).format('YYYY-MM-DD HH:mm'),
+			sortable: true,
+		},
+		{
+			name: 'Updated At',
+			selector: (row: any) => moment(row.updatedAt).format('YYYY-MM-DD HH:mm'),
+			sortable: true,
+		},
+		{
+			name: 'Action',
+			cell: (row: any) => (
+				<>
+					{currentRole.role === 'SUPERADMIN' && (
+						<span
+							className='cursor-pointer'
+							title='Delete'
+							onClick={() => {
+								Swal.fire({
+									title: 'Delete Query?',
+									text: 'Are you sure you want to delete this record?',
+									showCancelButton: true,
+									showCloseButton: true,
+								}).then((results) => {
+									if (results.isConfirmed) {
+										// dispatch(deleteClient(row._id));
+									}
+								});
+							}}>
+							<i
+								style={{ fontSize: '18px', color: 'red' }}
+								className='bi bi-trash'></i>
+						</span>
+					)}
+				</>
+			),
+			ignoreRowClick: true,
+			allowOverflow: true,
+			button: true,
+		},
+	];
 
-  return (
-    <React.Fragment>
-      <Head>
-        <title>View Clients | Midas - HRMS</title>
-      </Head>
+	useEffect(() => {
+		const roleData = localStorage.getItem('currentrole');
+		if (roleData) {
+			const parsedRole = JSON.parse(roleData);
+			setCurrentRole(parsedRole[0] || {});
+		}
+		dispatch(fetchQueries());
+	}, [dispatch]);
 
-      <div className="page-content">
-        <Breadcrumb breadcrumbItem="View Clients" breadcrumb="Dashboard" />
-        <Container fluid={true}>
-          {isLoading === true ? (
-            <Loader2 />
-          ) : (
-            <DataTable
-              columns={columns}
-              data={filteredData.length === 0 ? clientdata : filteredData}
-              pagination
-              defaultSortFieldId={1}
-              subHeader
-              subHeaderComponent={
-                <Custom_Filter
-                  data={clientdata}
-                  setFilteredData={setFilteredData}
-                />
-              }
-              persistTableHead
-            />
-          )}
-        </Container>
-      </div>
-    </React.Fragment>
-  );
+	return (
+		<React.Fragment>
+			<Head>
+				<title>View Queries | Midas - HRMS</title>
+			</Head>
+			<div className='page-content'>
+				<Breadcrumb
+					breadcrumbItem='View Clients'
+					breadcrumb='Dashboard'
+				/>
+				<Container fluid>
+					{isLoading ? (
+						<Loader2 />
+					) : (
+						<DataTable
+							columns={columns}
+							data={filteredData.length ? filteredData : customerQuery}
+							pagination
+							defaultSortFieldId={1}
+							subHeader
+							subHeaderComponent={
+								<Custom_Filter
+									data={customerQuery}
+									setFilteredData={setFilteredData}
+								/>
+							}
+							persistTableHead
+						/>
+					)}
+				</Container>
+			</div>
+		</React.Fragment>
+	);
 };
 
-ViewClient.getLayout = (page: ReactElement) => {
-  return <Layout>{page}</Layout>;
-};
+ViewClient.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;
 
 export default ViewClient;

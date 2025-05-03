@@ -91,6 +91,7 @@ class APIClient {
 const getLoggedinUser = () => {
 
   const user = typeof window !== 'undefined' && localStorage.getItem("authUser");
+  console.log(user);
   if (!user) {
     return null;
   } else {
