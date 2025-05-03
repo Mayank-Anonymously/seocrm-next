@@ -56,7 +56,6 @@ const Layout = ({ children }: any) => {
 
 	const dispatch: any = useDispatch();
 	const {
-		layoutType,
 		leftSidebarType,
 		layoutModeType,
 		layoutWidthType,
@@ -66,7 +65,6 @@ const Layout = ({ children }: any) => {
 		leftSidebarViewType,
 		leftSidebarImageType,
 	} = useSelector((state: any) => ({
-		layoutType: state.Layout.layoutType,
 		leftSidebarType: state.Layout.leftSidebarType,
 		layoutModeType: state.Layout.layoutModeType,
 		layoutWidthType: state.Layout.layoutWidthType,
@@ -82,7 +80,6 @@ const Layout = ({ children }: any) => {
     */
 	useEffect(() => {
 		if (
-			layoutType ||
 			leftSidebarType ||
 			layoutModeType ||
 			layoutWidthType ||
@@ -94,7 +91,6 @@ const Layout = ({ children }: any) => {
 		) {
 		}
 	}, [
-		layoutType,
 		leftSidebarType,
 		layoutModeType,
 		layoutWidthType,
@@ -111,7 +107,7 @@ const Layout = ({ children }: any) => {
 				<div>
 					<TopBar />
 					<Header />
-					<Sidebar layoutType={layoutType} />
+					<Sidebar layoutType={'horizontal'} />
 					<div className='main-content'>
 						{loading ? (
 							<LoadingSpinner requestedPath={requestedPath} />
