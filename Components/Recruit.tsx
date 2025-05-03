@@ -1,4 +1,3 @@
-import { fetchAllUser } from 'Components/slices/user/thunk';
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import React, { useEffect, useMemo, useState } from 'react';

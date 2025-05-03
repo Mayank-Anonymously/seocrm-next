@@ -18,7 +18,6 @@ import banner from '../Components/assets/images/bannerimg.jpg';
 import BarCharts from '@component/index';
 import ZoomIntegrationPage from '@common/ZoomIntegrationPage';
 import IncrementalDataComponent from 'pages/PipelinesforGrid';
-import { fetchAllUser } from 'Components/slices/user/thunk';
 import axios, { AxiosResponse } from 'axios';
 import { from, Observable, of, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
