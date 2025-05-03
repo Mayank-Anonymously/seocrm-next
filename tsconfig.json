@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "baseUrl": ".", // This must be specified if "paths" is.
+    "paths": {
+      "@component/*": ["Components/views/*"],
+      "@common/*": ["Components/Common/*"],
+      "@assets/*": ["Components/assets/*"],
+      "@shared/*": ["app/_shared/*"],
+      "@helpers/*": ["helpers/*"],
+      "@cyntler/react-doc-viewer/*": [
+        "node_modules/@cyntler/react-doc-viewer/*"
+      ]
+    },
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "Components/Common/utils/assign_jobs.tsx",
+    "Components/Common/sampleJobs.js"
+  ],
+  "exclude": ["node_modules"]
+}
