@@ -19,9 +19,7 @@ import {
   api_is_userdata_success,
   is_user_manager_success,
 } from "./reducers";
-import Factory from "Components/APIFactory/Factory";
-import Swal from "sweetalert2";
-import { apiError } from "../auth/login/reducer";
+
 export const fetchAllUser = () => async (dispatch: any) => {
   try {
     dispatch(api_is_userdata_loading(true));

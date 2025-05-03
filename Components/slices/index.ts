@@ -7,13 +7,6 @@ import {
 } from "@reduxjs/toolkit";
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
 
-// Front
-import LayoutReducer from "./layouts/reducer";
-import calendarSlice from "./calendar/reducer";
-import APIKeyslice from "./apiKey/reducer";
-import contactslice from "./contact/reducer";
-import teamslice from "./team/reducer";
-import dashboardslice from "./dashboard/reducer";
 
 // Authentication
 import LoginReducer from "./auth/login/reducer";
@@ -22,44 +15,22 @@ import ForgetPasswordReducer from "./auth/forgetpwd/reducer";
 import ProfileReducer from "./auth/profile/reducer";
 import vmsSlice from "./vms/reducers";
 import userSlice from "./user/reducers";
-import jobSlice from "./jobs/_alljobs/reducers";
-import clientSlice from "./jobs/_client/reducers";
-import assignSlice from "./jobs/_assigned/reducers";
-import statSlice from "./stats/reducers";
-import calcSlice from "./calculator/reducers";
 import managerSlice from "./auth/manager/reducer";
 import customerQuery from "./client/reducer";
-import employeeSlice from "./employee/reducers";
-import projectSlice from "./project/reducer";
-import facilitySlice from "./facility/reducer";
-import organisationSlice from "./organisation/reducer";
-import activitySlice from "./activity/reducer";
 
 const combinedReducer = combineReducers({
-  Layout: LayoutReducer,
-  Calendar: calendarSlice,
-  APIKey: APIKeyslice,
-  Contacts: contactslice,
+
   Login: LoginReducer,
   Account: AccountReducer,
   ForgetPassword: ForgetPasswordReducer,
   Profile: ProfileReducer,
-  Team: teamslice,
-  Dashboard: dashboardslice,
+
   VMS: vmsSlice,
   user: userSlice,
-  jobFeeds: jobSlice,
-  clientFeeds: clientSlice,
-  statFeed: statSlice,
-  calc: calcSlice,
-  assignFeed: assignSlice,
+  
   managerFeed: managerSlice,
   customer: customerQuery,
-  employee: employeeSlice,
-  project: projectSlice,
-  facility: facilitySlice,
-  organisationdata: organisationSlice,
-  activityFeed: activitySlice,
+  
 
 });
 
