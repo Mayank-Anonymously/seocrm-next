@@ -23,8 +23,6 @@ const ViewClient = () => {
 		isLoading: state.customer.isLoading,
 	}));
 
-
-  console.log(customerQuery);
 	const columns = [
 		{
 			name: 'Title',
