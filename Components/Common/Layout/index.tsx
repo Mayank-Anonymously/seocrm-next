@@ -56,7 +56,6 @@ const Layout = ({ children }: any) => {
 
 	const dispatch: any = useDispatch();
 	const {
-		leftSidebarType,
 		layoutModeType,
 		layoutWidthType,
 		layoutPositionType,
@@ -65,7 +64,6 @@ const Layout = ({ children }: any) => {
 		leftSidebarViewType,
 		leftSidebarImageType,
 	} = useSelector((state: any) => ({
-		leftSidebarType: state.Layout.leftSidebarType,
 		layoutModeType: state.Layout.layoutModeType,
 		layoutWidthType: state.Layout.layoutWidthType,
 		layoutPositionType: state.Layout.layoutPositionType,
@@ -80,7 +78,6 @@ const Layout = ({ children }: any) => {
     */
 	useEffect(() => {
 		if (
-			leftSidebarType ||
 			layoutModeType ||
 			layoutWidthType ||
 			layoutPositionType ||
@@ -91,7 +88,6 @@ const Layout = ({ children }: any) => {
 		) {
 		}
 	}, [
-		leftSidebarType,
 		layoutModeType,
 		layoutWidthType,
 		layoutPositionType,

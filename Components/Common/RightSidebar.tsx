@@ -55,28 +55,6 @@ const RightSidebar = () => {
 		}
 	});
 
-	const {
-		leftSidebarType,
-		layoutModeType,
-		layoutWidthType,
-		layoutPositionType,
-		topbarThemeType,
-		leftsidbarSizeType,
-		leftSidebarViewType,
-		leftSidebarImageType,
-		preloader,
-	} = useSelector((state: any) => ({
-		leftSidebarType: state.Layout.leftSidebarType,
-		layoutModeType: state.Layout.layoutModeType,
-		layoutWidthType: state.Layout.layoutWidthType,
-		layoutPositionType: state.Layout.layoutPositionType,
-		topbarThemeType: state.Layout.topbarThemeType,
-		leftsidbarSizeType: state.Layout.leftsidbarSizeType,
-		leftSidebarViewType: state.Layout.leftSidebarViewType,
-		leftSidebarImageType: state.Layout.leftSidebarImageType,
-		preloader: state.Layout.preloader,
-	}));
-
 	// open offcanvas
 	const [open, setOpen] = useState(false);
 	const toggleLeftCanvas = () => {
@@ -120,7 +98,7 @@ const RightSidebar = () => {
 				document.getElementById('preloader')!.style.visibility = 'hidden';
 			}, 1000);
 		}
-	}, [preloader, pathName]);
+	}, [pathName]);
 
 	return (
 		<React.Fragment>
@@ -131,18 +109,6 @@ const RightSidebar = () => {
 				id='back-to-top'>
 				<i className='ri-arrow-up-line'></i>
 			</Button>
-
-			{preloader === 'enable' && (
-				<div id='preloader'>
-					<div id='status'>
-						<div
-							className='spinner-border text-primary avatar-sm'
-							role='status'>
-							<span className='visually-hidden'>Loading...</span>
-						</div>
-					</div>
-				</div>
-			)}
 
 			<div>
 				<div className='customizer-setting d-none d-md-block'>
@@ -294,9 +260,6 @@ const RightSidebar = () => {
 													name='data-layout-mode'
 													id='layout-mode-light'
 													value={LAYOUT_MODE_TYPES.LIGHTMODE}
-													checked={
-														layoutModeType === LAYOUT_MODE_TYPES.LIGHTMODE
-													}
 													onChange={(e) => {
 														if (e.target.checked) {
 														}
@@ -334,9 +297,6 @@ const RightSidebar = () => {
 													name='data-layout-mode'
 													id='layout-mode-dark'
 													value={LAYOUT_MODE_TYPES.DARKMODE}
-													checked={
-														layoutModeType === LAYOUT_MODE_TYPES.DARKMODE
-													}
 													onChange={(e) => {
 														if (e.target.checked) {
 														}
@@ -382,9 +342,6 @@ const RightSidebar = () => {
 												name='data-topbar'
 												id='topbar-color-light'
 												value={LAYOUT_TOPBAR_THEME_TYPES.LIGHT}
-												checked={
-													topbarThemeType === LAYOUT_TOPBAR_THEME_TYPES.LIGHT
-												}
 												onChange={(e) => {
 													if (e.target.checked) {
 													}
@@ -421,9 +378,6 @@ const RightSidebar = () => {
 												name='data-topbar'
 												id='topbar-color-dark'
 												value={LAYOUT_TOPBAR_THEME_TYPES.DARK}
-												checked={
-													topbarThemeType === LAYOUT_TOPBAR_THEME_TYPES.DARK
-												}
 												onChange={(e) => {
 													if (e.target.checked) {
 													}
@@ -467,7 +421,6 @@ const RightSidebar = () => {
 													name='data-preloader'
 													id='preloader-view-custom'
 													value={PERLOADER_TYPES.ENABLE}
-													checked={preloader === PERLOADER_TYPES.ENABLE}
 													onChange={(e) => {
 														if (e.target.checked) {
 														}
@@ -518,7 +471,6 @@ const RightSidebar = () => {
 													name='data-preloader'
 													id='preloader-view-none'
 													value={PERLOADER_TYPES.DISABLE}
-													checked={preloader === PERLOADER_TYPES.DISABLE}
 													onChange={(e) => {
 														if (e.target.checked) {
 														}
