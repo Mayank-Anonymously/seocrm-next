@@ -32,7 +32,6 @@ import {
 import { IconButton, Tooltip } from '@mui/material';
 
 //Icons Imports
-import { deleteVMS } from 'Components/slices/vms/thunk';
 import { useSelector, useDispatch } from 'react-redux';
 import { LAYOUT_MODE_TYPES } from '../constants/layout';
 import { useRouter } from 'next/router';
