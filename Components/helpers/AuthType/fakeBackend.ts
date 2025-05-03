@@ -1,7 +1,7 @@
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 
-import * as url from "../url_helper";
+import * as url from "../url_helper"
 
 import accessToken from "../jwt-token-access/accessToken";
 
@@ -15,7 +15,7 @@ import {
   allRevenueChartData,
   monthRevenueChartData,
   halfYearRevenueChartData,
-  yearRevenueChartData,
+  yearRevenueChartData
 } from "@common/data";
 
 let users = [
@@ -32,7 +32,7 @@ const fakeBackend = () => {
   // This sets the mock adapter on the default instance
   const mock = new MockAdapter(axios, { onNoMatch: "passthrough" });
 
-  mock.onPost(url.POST_FAKE_REGISTER).reply((config) => {
+  mock.onPost(url.POST_FAKE_REGISTER).reply(config => {
     const user = JSON.parse(config["data"]);
     users.push(user);
     return new Promise((resolve, reject) => {
@@ -42,10 +42,10 @@ const fakeBackend = () => {
     });
   });
 
-  mock.onPost(url.POST_LOGIN).reply((config) => {
+  mock.onPost(url.POST_FAKE_LOGIN).reply(config => {
     const user = JSON.parse(config["data"]);
     const validUser = users.filter(
-      (usr) => usr.email === user.email && usr.password === user.password
+      usr => usr.email === user.email && usr.password === user.password
     );
 
     return new Promise((resolve, reject) => {
@@ -54,14 +54,14 @@ const fakeBackend = () => {
           resolve([200, validUser[0]]);
         } else {
           reject(
-            "Username and password are invalid. Please enter correct username and password"
+            "Username and password are invalid. Please enter correct username and password",
           );
         }
       });
     });
   });
 
-  mock.onPost("/fake-forget-pwd").reply((config) => {
+  mock.onPost("/fake-forget-pwd").reply(config => {
     // User needs to check that user is eXist or not and send mail for Reset New password
 
     return new Promise((resolve, reject) => {
@@ -71,7 +71,7 @@ const fakeBackend = () => {
     });
   });
 
-  mock.onPost("/post-jwt-register").reply((config) => {
+  mock.onPost("/post-jwt-register").reply(config => {
     const user = JSON.parse(config["data"]);
     users.push(user);
 
@@ -82,10 +82,10 @@ const fakeBackend = () => {
     });
   });
 
-  mock.onPost("/post-jwt-login").reply((config) => {
+  mock.onPost("/post-jwt-login").reply(config => {
     const user = JSON.parse(config["data"]);
     const validUser = users.filter(
-      (usr) => usr.email === user.email && usr.password === user.password
+      usr => usr.email === user.email && usr.password === user.password
     );
 
     return new Promise((resolve, reject) => {
@@ -109,14 +109,14 @@ const fakeBackend = () => {
     });
   });
 
-  mock.onPost("/post-jwt-profile").reply((config) => {
+  mock.onPost("/post-jwt-profile").reply(config => {
     const user = JSON.parse(config["data"]);
 
     const one = config.headers;
 
     let finalToken = one?.Authorization;
 
-    const validUser = users.filter((usr) => usr.uid === user.idx);
+    const validUser = users.filter(usr => usr.uid === user.idx);
 
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -126,7 +126,7 @@ const fakeBackend = () => {
             let objIndex;
 
             //Find index of specific object using findIndex method.
-            objIndex = users.findIndex((obj) => obj.uid === user.idx);
+            objIndex = users.findIndex(obj => obj.uid === user.idx);
 
             //Update object's name property.
             users[objIndex].username = user.username;
@@ -146,10 +146,10 @@ const fakeBackend = () => {
     });
   });
 
-  mock.onPost(url.POST_EDIT_PROFILE).reply((config) => {
+  mock.onPost(url.POST_EDIT_PROFILE).reply(config => {
     const user = JSON.parse(config["data"]);
 
-    const validUser = users.filter((usr) => usr.uid === user.idx);
+    const validUser = users.filter(usr => usr.uid === user.idx);
 
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -157,7 +157,7 @@ const fakeBackend = () => {
           let objIndex;
 
           //Find index of specific object using findIndex method.
-          objIndex = users.findIndex((obj) => obj.uid === user.idx);
+          objIndex = users.findIndex(obj => obj.uid === user.idx);
 
           //Update object's name property.
           users[objIndex].username = user.username;
@@ -174,7 +174,7 @@ const fakeBackend = () => {
     });
   });
 
-  mock.onPost("/jwt-forget-pwd").reply((config) => {
+  mock.onPost("/jwt-forget-pwd").reply(config => {
     // User needs to check that user is eXist or not and send mail for Reset New password
 
     return new Promise((resolve, reject) => {
@@ -184,7 +184,7 @@ const fakeBackend = () => {
     });
   });
 
-  mock.onPost("/social-login").reply((config) => {
+  mock.onPost("/social-login").reply(config => {
     const user = JSON.parse(config["data"]);
 
     return new Promise((resolve, reject) => {
@@ -340,6 +340,7 @@ const fakeBackend = () => {
     });
   });
 
+
   // Contacts
   mock.onGet(url.GET_CONTACTS).reply(() => {
     return new Promise((resolve, reject) => {
@@ -471,7 +472,7 @@ const fakeBackend = () => {
       });
     });
   });
-
+  
   mock.onGet(url.GET_HALFYEARLY_DATA).reply(() => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -497,6 +498,8 @@ const fakeBackend = () => {
       });
     });
   });
+
+
 };
 
 export default fakeBackend;

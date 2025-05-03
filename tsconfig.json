@@ -11,27 +11,18 @@
     "module": "esnext",
     "baseUrl": ".", // This must be specified if "paths" is.
     "paths": {
-      "@component/*": ["Components/views/*"],
-      "@common/*": ["Components/Common/*"],
-      "@assets/*": ["Components/assets/*"],
-      "@shared/*": ["app/_shared/*"],
-      "@helpers/*": ["helpers/*"],
-      "@cyntler/react-doc-viewer/*": [
-        "node_modules/@cyntler/react-doc-viewer/*"
-      ]
-    },
+       "@component/*": ["Components/views/*"],
+       "@common/*": ["Components/Common/*"],
+       "@assets/*": ["Components/assets/*"],
+       "@shared/*": ["app/_shared/*"],
+       "@helpers/*": ["helpers/*"]
+   },
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "Components/Common/utils/assign_jobs.tsx",
-    "Components/Common/sampleJobs.js"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

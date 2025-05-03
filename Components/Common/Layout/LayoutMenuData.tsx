@@ -1,24 +1,29 @@
-/* import React, { useEffect, useState } from "react";
-import Router, { useRouter } from "next/router";
-import { user } from "Components/interface/user";
+import React, { useEffect, useState } from "react";
+import Router from "next/router";
+import { off } from "process";
 const Navdata = () => {
-  const router = useRouter();
-  // state data
+  //state data
   const [isAuth, setIsAuth] = useState(false);
-  const [isJobs, setIsJobs] = useState(false);
-  const [hrms, setHrms] = useState(false);
+  const [products, setProducts] = useState(false);
+  const [accounting, setAccounting] = useState(false);
+  const [bottleBreak, setBottle] = useState(false);
+  const [vendor, setVendor] = useState(false);
+  const [user, setUser] = useState(false);
+  const [queries,setQuery] = useState(false);
+  const [categories, setCategories] = useState(false);
+  const [order, setOrder] = useState(false);
+  const [delivery, setDelivery] = useState(false);
+  const [location, setLocation] = useState(false);
+  const [recharge, setRecharge] = useState(false);
+  const [firsttimerecharge, setfirsttimeRecharge] = useState(false);
+  const [testimonial,setTestimonial] = useState(false);
+  const [contactForm,setContactForm] = useState(false);
+  const [subscribeMail,setSubscibeMail] = useState(false);
+  const [review,setReview] = useState(false);
   const [isPages, setIsPages] = useState(false);
   const [isMultiLevel, setIsMultiLevel] = useState(false);
-  const [isVms, setIsVms] = useState(false);
-  const [isStats, setIsStats] = useState(false);
-  const [isActivity, setIsActivity] = useState(false);
-  const [isOrganisation, setIsOrganisation] = useState(false);
-  const [isEmployee, setIsEmployee] = useState(false);
 
-  const [isClient, setIsClient] = useState(false);
-  const [isFacility, setIsFacility] = useState(false);
-  const [user, setUser] = useState(false);
-  //  Authentication
+  // Authentication
   const [isSignIn, setIsSignIn] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [isPasswordReset, setIsPasswordReset] = useState(false);
@@ -26,17 +31,25 @@ const Navdata = () => {
   const [isLockScreen, setIsLockScreen] = useState(false);
   const [isLogout, setIsLogout] = useState(false);
   const [isSuccessMessage, setIsSuccessMessage] = useState(false);
-  const [isVMSHrms, setIsVMSHRMS] = useState(false);
-  const [isPipeline, setIsPipeline] = useState(false);
+  const [isVerification, setIsVerification] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [userObj, setUserobj] = useState<any>({});
-  //  Pages
+  const [hub, setHub] = useState(false);
+  const [partner, setPartner] = useState(false);
+  const [banner, setBanner] = useState(false);
+  const [slider,setSlider] = useState(false);
+  const [offerHeading,setOfferHeading] = useState(false);
+  const [membership, setMembership] = useState(false);
+  const [city, setCity] = useState(false);
+  const [content, setContent] = useState(false);
+  const [stock, setStock] = useState(false);
+  const [offer, setOffer] = useState(false);
+  // Pages
   const [isProfile, setIsProfile] = useState(false);
 
-  //  Multi Level
+  // Multi Level
   const [isLevel1, setIsLevel1] = useState(false);
   const [isLevel2, setIsLevel2] = useState(false);
-  const [userdetails, setUserDetails] = useState<any>("");
+
   const [isCurrentState, setIsCurrentState] = useState("");
 
   function updateIconSidebar(e: any) {
@@ -57,15 +70,59 @@ const Navdata = () => {
   }
 
   useEffect(() => {
-    if (localStorage.getItem("authUser")) {
-      const obj: any = JSON.parse(localStorage.getItem("authUser") || "");
-      setUserDetails(obj);
-    }
     document.body.classList.remove("twocolumn-panel");
     if (isCurrentState !== "Auth") {
       setIsAuth(false);
     }
-    if (isCurrentState !== "Pages") {
+    if (isCurrentState !== "Accounting") {
+      setProducts(false);
+    }
+    if (isCurrentState !== "User") {
+      setProducts(false);
+    }
+    if (isCurrentState !== "Vendor") {
+      setProducts(false);
+    }
+    if (isCurrentState !== "BottleBreak") {
+      setProducts(false);
+    }
+    if (isCurrentState !== "Products") {
+      setProducts(false);
+    }
+    if (isCurrentState !== "Categories") {
+      setCategories(false);
+    }
+    if (isCurrentState !== "Order") {
+      setIsPages(false);
+    }
+    if (isCurrentState !== "location") {
+      setIsPages(false);
+    }
+    if (isCurrentState !== "hub") {
+      setIsPages(false);
+    }
+    if (isCurrentState !== "partner") {
+      setIsPages(false);
+    }
+    if (isCurrentState !== "city") {
+      setIsPages(false);
+    }
+    if (isCurrentState !== "content") {
+      setIsPages(false);
+    }
+    if (isCurrentState !== "stock") {
+      setIsPages(false);
+    }
+    if (isCurrentState !== "offer") {
+      setIsPages(false);
+    }
+    if (isCurrentState !== "membership") {
+      setIsPages(false);
+    }
+    if (isCurrentState !== "delivery") {
+      setIsPages(false);
+    }
+    if (isCurrentState !== "recharge") {
       setIsPages(false);
     }
     if (isCurrentState !== "MuliLevel") {
@@ -96,1065 +153,316 @@ const Navdata = () => {
       document.body.classList.add("twocolumn-panel");
     }
     if (isCurrentState === "Components") {
-      Router.push("https:hybrix-nextjs-components.vercel.app/");
+      Router.push("https://lavya-backend-components.vercel.app/");
       document.body.classList.add("twocolumn-panel");
     }
-    if (localStorage.getItem("currentrole")) {
-      const obj: any = JSON.parse(localStorage.getItem("currentrole") || "{}");
-      setUserobj(obj[0]);
-    }
   }, [isCurrentState, isAuth, isPages, isMultiLevel]);
-  const menuItems: any =
-    userObj.role === "SUPERADMIN" || userObj.role === "ADMIN"
-      ? [
-          {
-            id: "dashboard",
-            label: "Dashboard",
-            icon: "bi bi-speedometer2",
-            link: "/dashboard",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsCurrentState("Dashboard");
-            },
-          },
-          {
-            id: "jobs",
-            label: "Jobs",
-            icon: "bi bi-menu-button-wide-fill  ",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsJobs(!isJobs);
-              setIsCurrentState("Jobs");
-              updateIconSidebar(e);
-            },
-            stateVariables: isJobs,
-            subItems: [
-              {
-                id: "allJobs",
-                label: "All Jobs",
-                link: "/jobs/all-feeds",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-            ],
-          },
-          {
-            id: "pipeline",
-            label: "Pipeline",
-            icon: "bi bi-person-circle",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsPipeline(!isPipeline);
-              setIsCurrentState("Pipeline");
-              updateIconSidebar(e);
-            },
-            stateVariables: isPipeline,
-            subItems: [
-              {
-                id: "pipeline",
-                label: "Add Pipeline",
-                link: "/pipeline/upload-pipeline",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-              {
-                id: "viewpipeline",
-                label: "View Pipeline",
-                link: "/pipeline/view-pipeline",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-            ],
-          },
 
-          {
-            id: "vms",
-            label: "VMS's Config",
-            icon: "bi bi-person-circle",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsVms(!isVms);
-              setIsCurrentState("VMS's Config");
-              updateIconSidebar(e);
-            },
-            stateVariables: isVms,
-            subItems: [
-              {
-                id: "assignVms",
-                label: "Assign-VMS",
-                link: "/vms/assign-vms",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "vms",
-                stateVariables: isSignIn,
-              },
-            ],
-          },
-          {
-            id: "stats",
-            label: "Stats",
-            icon: "bi bi-clipboard-data",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsStats(!isStats);
-              setIsCurrentState("Stats");
-              updateIconSidebar(e);
-            },
-            stateVariables: isStats,
-            subItems: [
-              {
-                id: "feedStats",
-                label: "Feed Stats",
-                link: "/stats/feed-stats",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "stats",
-                stateVariables: isSignIn,
-              },
-            ],
-          },
-          {
-            label: "HRMS",
-            isHeader: true,
-          },
-          {
-            id: "user",
-            label: "Users",
-            icon: "bi bi-person-circle ",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setUser(!user);
-              setIsCurrentState("User");
-              updateIconSidebar(e);
-            },
-            stateVariables: user,
-            subItems: [
-              {
-                id: "adduser",
-                label: "Add-Users",
-                link: "/users/add-user",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "user",
-                stateVariables: isSignIn,
-              },
-              {
-                id: "viewuser",
-                label: "View-Users",
-                link: "/users/view-user",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "user",
-                stateVariables: isSignUp,
-              },
-            ],
-          },
+  const menuItems: any = [
+    {
+      label: "Menu",
+      isHeader: true,
+    },
+    {
+      id: "dashboard",
+      label: "Dashboard",
+      icon: "bi bi-speedometer2",
+      link: "/dashboard",
+      click: function (e: any) {
+        e.preventDefault();
+        setIsCurrentState("Dashboard");
+      },
+    },
+    {
+      label: "Pages",
+      isHeader: true,
+    },
+    {
+      id: "Users",
+      label: "Users",
+      icon: "bi bi-person-circle",
+      link: "/#",
+      click: function (e: any) {
+        e.preventDefault();
+        setUser(!user);
+        setIsCurrentState("User");
+        updateIconSidebar(e);
+      },
+      stateVariables: user,
+      subItems: [
+        {
+          id: "Users",
+          label: "Users List",
+          link: "/user",
 
-          {
-            id: "employee",
-            label: "Employees",
-            icon: "bi bi-menu-button-wide-fill ",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsEmployee(!isEmployee);
-              setIsCurrentState("VMS's Config");
-              updateIconSidebar(e);
-            },
-            stateVariables: isEmployee,
-            subItems: [
-              {
-                id: "control",
-                label: "Employee-control",
-                link: "/employee/employee-control",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "employee",
-                stateVariables: isSignIn,
-              },
-            ],
+          click: function (e: any) {
+            e.preventDefault();
+            setIsSignIn(!isSignIn);
           },
+          parentId: "User",
+          stateVariables: isSignIn,
+        },
+      ],
+    },
+    {
+      id: "user-query",
+      label: "Queries",
+      icon: "bi bi-person-circle",
+      link: "/#",
+      click: function (e: any) {
+        e.preventDefault();
+        setQuery(!queries);
+        setIsCurrentState("Query");
+        updateIconSidebar(e);
+      },
+      stateVariables: queries,
+      subItems: [
+        {
+          id: "user-query",
+          label: "User Queries",
+          link: "/user-queries",
+          click: function (e: any) {
+            e.preventDefault();
+            setIsSignIn(!isSignIn);
+          },
+          parentId: "Query",
+          stateVariables: isSignIn,
+        },
+      ],
+    },
 
-          {
-            id: "client",
-            label: "Clients",
-            icon: "bi bi-clipboard-data",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsClient(!isClient);
-              setIsCurrentState("Stats");
-              updateIconSidebar(e);
-            },
-            stateVariables: isClient,
-            subItems: [
-              {
-                id: "addClient",
-                label: "Add Client",
-                link: "/client/add-client",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "client",
-                stateVariables: isSignIn,
-              },
-              {
-                id: "viewClient",
-                label: "View Client",
-                link: "/client/view-client",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "client",
-                stateVariables: isSignIn,
-              },
-            ],
+    {
+      id: "Membership",
+      label: "membership",
+      icon: "bi bi-person-circle",
+      link: "/#",
+      click: function (e: any) {
+        e.preventDefault();
+        setMembership(!membership);
+        setIsCurrentState("membership");
+        updateIconSidebar(e);
+      },
+      stateVariables: membership,
+      subItems: [
+        {
+          id: "membership",
+          label: "membership",
+          link: "/membership",
+          click: function (e: any) {
+            e.preventDefault();
+            setIsSignUp(!isSignUp);
           },
-          {
-            id: "facility",
-            label: "Facility",
-            icon: "bi bi-layers",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsFacility(!isFacility);
-              setIsCurrentState("Stats");
-              updateIconSidebar(e);
-            },
-            stateVariables: isFacility,
-            subItems: [
-              {
-                id: "addFacility",
-                label: "Add Facility",
-                link: "/facility/add-facility",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "facility",
-                stateVariables: isSignIn,
-              },
-              {
-                id: "viewFacility",
-                label: "View Facility",
-                link: "/facility/view-facility",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "facility",
-                stateVariables: isSignIn,
-              },
-            ],
-          },
-          {
-            id: "vms",
-            label: "VMS",
-            icon: "bi bi-clipboard-data",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsVMSHRMS(!isVMSHrms);
-              setIsCurrentState("Stats");
-              updateIconSidebar(e);
-            },
-            stateVariables: isVMSHrms,
-            subItems: [
-              {
-                id: "addVMS",
-                label: "Add VMS",
-                link: "/vms/add-vms",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "vms",
-                stateVariables: isSignIn,
-              },
-              {
-                id: "viewVMS",
-                label: "View VMS",
-                link: "/vms/view-vms",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "vms",
-                stateVariables: isSignIn,
-              },
-            ],
-          },
-          {
-            id: "organisation",
-            label: "Organisation",
-            icon: "bi bi-command",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsOrganisation(!isOrganisation);
-              setIsCurrentState("Stats");
-              updateIconSidebar(e);
-            },
-            stateVariables: isOrganisation,
-            subItems: [
-              {
-                id: "addOrganisation",
-                label: "Add Organisation",
-                link: "/organisation/add-organisation",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "organisation",
-                stateVariables: isSignIn,
-              },
-              {
-                id: "viewOrganisation",
-                label: "View Organisation",
-                link: "/organisation/view-organisation",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "organisation",
-                stateVariables: isSignIn,
-              },
-            ],
-          },
-          {
-            id: "activity",
-            label: "Activity",
-            icon: "bi bi-clipboard-data",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsActivity(!isActivity);
-              setIsCurrentState("Stats");
-              updateIconSidebar(e);
-            },
-            stateVariables: isActivity,
-            subItems: [
-              {
-                id: "loginActivity",
-                label: "Login Activity",
-                link: "/activity/login-activity",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "stats",
-                stateVariables: isSignIn,
-              },
-            ],
-          },
-        ]
-      : userObj.role === "ACCOUNTMANAGER"
-      ? [
-          {
-            label: "Menu",
-            isHeader: true,
-          },
-          {
-            id: "dashboard",
-            label: "Dashboard",
-            icon: "bi bi-speedometer2",
-            link: "/dashboard",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsCurrentState("Dashboard");
-            },
-          },
-          {
-            label: "Job Portal",
-            isHeader: true,
-          },
-          {
-            id: "jobs",
-            label: "Jobs",
-            icon: "bi bi-menu-button-wide-fill  ",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsJobs(!isJobs);
-              setIsCurrentState("Jobs");
-              updateIconSidebar(e);
-            },
-            stateVariables: isJobs,
-            subItems: [
-              {
-                id: "client",
-                label: "Client-Jobs",
-                link: `/jobs/client/${userdetails._pid}`,
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "jobs",
-                stateVariables: isSignIn,
-              },
-              {
-                id: "allJobs",
-                label: "All-Jobs",
-                link: `/jobs/all-feeds`,
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-              {
-                id: "assignedJobs",
-                label: "Assigned-Jobs",
-                link: "/jobs/assigned",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-            ],
-          },
-          {
-            id: "pipeline",
-            label: "Pipeline",
-            icon: "bi bi-person-circle",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsPipeline(!isPipeline);
-              setIsCurrentState("Pipeline");
-              updateIconSidebar(e);
-            },
-            stateVariables: isPipeline,
-            subItems: [
-              {
-                id: "pipeline",
-                label: "Add Pipeline",
-                link: "/pipeline/upload-pipeline",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-              {
-                id: "viewpipeline",
-                label: "View Pipeline",
-                link: "/pipeline/view-pipeline",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-              {
-                id: "pipeline",
-                label: "View Team Pipeline",
-                link: "/pipeline/pipeline-for-manager",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-            ],
-          },
-        ]
-      : userObj.role === "TEAMLEAD"
-      ? [
-          {
-            id: "dashboard",
-            label: "Dashboard",
-            icon: "bi bi-speedometer2",
-            link: "/dashboard",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsCurrentState("Dashboard");
-            },
-          },
-          {
-            id: "jobs",
-            label: "Jobs",
-            icon: "bi bi-menu-button-wide-fill  ",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsJobs(!isJobs);
-              setIsCurrentState("Jobs");
-              updateIconSidebar(e);
-            },
-            stateVariables: isJobs,
-            subItems: [
-              {
-                id: "allJobs",
-                label: "All-Jobs",
-                link: "/jobs/all-feeds",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-              {
-                id: "assignedJobs",
-                label: "Assigned-Jobs",
-                link: "/jobs/assigned",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-            ],
-          },
-          {
-            id: "pipeline",
-            label: "Pipeline",
-            icon: "bi bi-person-circle",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsPipeline(!isPipeline);
-              setIsCurrentState("Pipeline");
-              updateIconSidebar(e);
-            },
-            stateVariables: isPipeline,
-            subItems: [
-              {
-                id: "pipeline",
-                label: "Add Pipeline",
-                link: "/pipeline/upload-pipeline",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-              {
-                id: "viewpipeline",
-                label: "View Pipeline",
-                link: "/pipeline/view-pipeline",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-              {
-                id: "pipeline",
-                label: "View Team Pipeline",
-                link: "/pipeline/pipeline-for-manager",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-            ],
-          },
-        ]
-      : userObj.role === "RECRUITER"
-      ? [
-          {
-            id: "dashboard",
-            label: "Dashboard",
-            icon: "bi bi-speedometer2",
-            link: "/dashboard",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsCurrentState("Dashboard");
-            },
-          },
-
-          {
-            id: "jobs",
-            label: "Jobs",
-            icon: "bi bi-menu-button-wide-fill  ",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsJobs(!isJobs);
-              setIsCurrentState("Jobs");
-              updateIconSidebar(e);
-            },
-            stateVariables: isJobs,
-            subItems: [
-              {
-                id: "allJobs",
-                label: "All-Jobs",
-                link: "/jobs/all-feeds",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-              {
-                id: "assignedJobs",
-                label: "Assigned-Jobs",
-                link: "/jobs/assigned",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-            ],
-          },
-          {
-            id: "pipeline",
-            label: "Pipeline",
-            icon: "bi bi-person-circle",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsPipeline(!isPipeline);
-              setIsCurrentState("Pipeline");
-              updateIconSidebar(e);
-            },
-            stateVariables: isPipeline,
-            subItems: [
-              {
-                id: "pipeline",
-                label: "Add Pipeline",
-                link: "/pipeline/upload-pipeline",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-              {
-                id: "viewpipeline",
-                label: "View Pipeline",
-                link: "/pipeline/view-pipeline",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-            ],
-          },
-        ]
-      : userObj.role === "ONBOARD"
-      ? [
-          {
-            id: "employee",
-            label: "Employees",
-            icon: "bi bi-menu-button-wide-fill ",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsEmployee(!isEmployee);
-              setIsCurrentState("VMS's Config");
-              updateIconSidebar(e);
-            },
-            stateVariables: isEmployee,
-            subItems: [
-              {
-                id: "control",
-                label: "Employee-control",
-                link: "/employee/employee-control",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "employee",
-                stateVariables: isSignIn,
-              },
-            ],
-          },
-        ]
-      : userObj.role === "MODERATOR"
-      ? [
-          {
-            id: "user",
-            label: "Users",
-            icon: "bi bi-person-circle ",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setUser(!user);
-              setIsCurrentState("User");
-              updateIconSidebar(e);
-            },
-            stateVariables: user,
-            subItems: [
-              {
-                id: "adduser",
-                label: "Add-Users",
-                link: "/users/add-user",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "user",
-                stateVariables: isSignIn,
-              },
-              {
-                id: "viewuser",
-                label: "View-Users",
-                link: "/users/view-user",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "user",
-                stateVariables: isSignUp,
-              },
-            ],
-          },
-        ]
-      : userObj.role === "GENERALMANAGER"
-      ? [
-          {
-            label: "Menu",
-            isHeader: true,
-          },
-          {
-            id: "dashboard",
-            label: "Dashboard",
-            icon: "bi bi-speedometer2",
-            link: "/dashboard",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsCurrentState("Dashboard");
-            },
-          },
-          {
-            id: "jobs",
-            label: "Jobs",
-            icon: "bi bi-menu-button-wide-fill  ",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsJobs(!isJobs);
-              setIsCurrentState("Jobs");
-              updateIconSidebar(e);
-            },
-            stateVariables: isJobs,
-            subItems: [
-              {
-                id: "client",
-                label: "Client-Jobs",
-                link: `/jobs/client/${userdetails.id}`,
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignIn(!isSignIn);
-                },
-                parentId: "jobs",
-                stateVariables: isSignIn,
-              },
-              {
-                id: "allJobs",
-                label: "All-Jobs",
-                link: "/jobs/all-feeds",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-              {
-                id: "assignedJobs",
-                label: "Assigned-Jobs",
-                link: "/jobs/assigned",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-              {
-                id: "manager",
-                label: "Assigned-By-Manager",
-                link: "/jobs/manager",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-            ],
-          },
-          {
-            id: "pipeline",
-            label: "Pipeline",
-            icon: "bi bi-person-circle",
-            link: "/#",
-            click: function (e: any) {
-              e.preventDefault();
-              setIsPipeline(!isPipeline);
-              setIsCurrentState("Pipeline");
-              updateIconSidebar(e);
-            },
-            stateVariables: isPipeline,
-            subItems: [
-              {
-                id: "pipeline",
-                label: "Add Pipeline",
-                link: "/pipeline/upload-pipeline",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-              {
-                id: "viewpipeline",
-                label: "View Pipeline",
-                link: "/pipeline/view-pipeline",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-              {
-                id: "pipeline",
-                label: "View Team Pipeline",
-                link: "/pipeline/pipeline-for-manager",
-                click: function (e: any) {
-                  e.preventDefault();
-                  setIsSignUp(!isSignUp);
-                },
-                parentId: "jobs",
-                stateVariables: isSignUp,
-              },
-            ],
-          },
-        ]
-      : [];
+          parentId: "Membership",
+          stateVariables: "Membership",
+        },
+      ],
+    },
+  
+    // {
+    //   id: "pages",
+    //   label: "Pages",
+    //   icon: "bi bi-journal-medical",
+    //   link: "/#",
+    //   click: function (e: any) {
+    //     e.preventDefault();
+    //     setIsPages(!isPages);
+    //     setIsCurrentState("Pages");
+    //     updateIconSidebar(e);
+    //   },
+    //   stateVariables: isPages,
+    //   subItems: [
+    //     {
+    //       id: "starter",
+    //       label: "Starter",
+    //       link: "/pages/starter",
+    //       parentId: "pages",
+    //     },
+    //     {
+    //       id: "profile",
+    //       label: "Profile",
+    //       link: "/#",
+    //       isChildItem: true,
+    //       click: function (e: any) {
+    //         e.preventDefault();
+    //         setIsProfile(!isProfile);
+    //       },
+    //       parentId: "pages",
+    //       stateVariables: isProfile,
+    //       childItems: [
+    //         {
+    //           id: 1,
+    //           label: "Simple Page",
+    //           link: "/pages/profile/page",
+    //           parentId: "pages",
+    //         },
+    //         {
+    //           id: 2,
+    //           label: "Settings",
+    //           link: "/pages/profile/settings",
+    //           parentId: "pages",
+    //         },
+    //       ],
+    //     },
+    //     { id: "team", label: "Team", link: "/pages/team", parentId: "pages" },
+    //     {
+    //       id: "timeline",
+    //       label: "Timeline",
+    //       link: "/pages/timeline",
+    //       parentId: "pages",
+    //     },
+    //     { id: "faqs", label: "FAQs", link: "/pages/faqs", parentId: "pages" },
+    //     {
+    //       id: "pricing",
+    //       label: "Pricing",
+    //       link: "/pages/pricing",
+    //       parentId: "pages",
+    //     },
+    //     {
+    //       id: "maintenance",
+    //       label: "Maintenance",
+    //       link: "/pages/maintenance",
+    //       parentId: "pages",
+    //     },
+    //     {
+    //       id: "comingSoon",
+    //       label: "Coming Soon",
+    //       link: "/pages/coming-soon",
+    //       parentId: "pages",
+    //     },
+    //     {
+    //       id: "sitemap",
+    //       label: "Sitemap",
+    //       link: "/pages/sitemap",
+    //       parentId: "pages",
+    //     },
+    //     {
+    //       id: "searchResults",
+    //       label: "Search Results",
+    //       link: "/pages/search-results",
+    //       parentId: "pages",
+    //     },
+    //   ],
+    // },
+    // {
+    //   id: "widgets",
+    //   label: "Widgets",
+    //   icon: "bi bi-hdd-stack",
+    //   link: "/widgets",
+    //   click: function (e: any) {
+    //     e.preventDefault();
+    //     setIsCurrentState("Widgets");
+    //   },
+    // },
+    // {
+    //   id: "components",
+    //   label: "Components",
+    //   icon: "bi bi-layers",
+    //   isBlankLink: true,
+    //   link: "https://lavya-backend-components.vercel.app/",
+    //   click: function (e: any) {
+    //     e.preventDefault();
+    //     setIsCurrentState("Components");
+    //   },
+    // },
+    // {
+    //   label: "Apps",
+    //   isHeader: true,
+    // },
+    // {
+    //   id: "calendar",
+    //   label: "Calendar",
+    //   icon: "bi bi-calendar3",
+    //   link: "/calendar",
+    //   click: function (e: any) {
+    //     e.preventDefault();
+    //     setIsCurrentState("Calendar");
+    //   },
+    // },
+    // {
+    //   id: "api-key",
+    //   label: "API Key",
+    //   icon: "bi bi-key",
+    //   link: "/api-key",
+    //   click: function (e: any) {
+    //     e.preventDefault();
+    //     setIsCurrentState("API Key");
+    //   },
+    // },
+    // {
+    //   id: "contact",
+    //   label: "Contact",
+    //   icon: "bi bi-person-square",
+    //   link: "/contact",
+    //   click: function (e: any) {
+    //     e.preventDefault();
+    //     setIsCurrentState("Contact");
+    //   },
+    // },
+    // {
+    //   id: "leaderboard",
+    //   label: "Leaderboard",
+    //   icon: "bi bi-gem",
+    //   link: "/leaderboard",
+    //   click: function (e: any) {
+    //     e.preventDefault();
+    //     setIsCurrentState("Leaderboard");
+    //   },
+    // },
+    // {
+    //   label: "Layouts",
+    //   isHeader: true,
+    // },
+    // {
+    //   id: "multilevel",
+    //   label: "Multi Level",
+    //   icon: "bi bi-share",
+    //   link: "/#",
+    //   click: function (e: any) {
+    //     e.preventDefault();
+    //     setIsMultiLevel(!isMultiLevel);
+    //     setIsCurrentState("MuliLevel");
+    //     updateIconSidebar(e);
+    //   },
+    //   stateVariables: isMultiLevel,
+    //   subItems: [
+    //     {
+    //       id: "level1.1",
+    //       label: "Level 1.1",
+    //       link: "/#",
+    //       parentId: "multilevel",
+    //     },
+    //     {
+    //       id: "level1.2",
+    //       label: "Level 1.2",
+    //       link: "/#",
+    //       isChildItem: true,
+    //       click: function (e: any) {
+    //         e.preventDefault();
+    //         setIsLevel1(!isLevel1);
+    //       },
+    //       stateVariables: isLevel1,
+    //       childItems: [
+    //         { id: 1, label: "Level 2.1", link: "/#" },
+    //         {
+    //           id: "level2.2",
+    //           label: "Level 2.2",
+    //           link: "/#",
+    //           isChildItem: true,
+    //           click: function (e: any) {
+    //             e.preventDefault();
+    //             setIsLevel2(!isLevel2);
+    //           },
+    //           stateVariables: isLevel2,
+    //           childItems: [
+    //             { id: 1, label: "Level 3.1", link: "/#" },
+    //             { id: 2, label: "Level 3.2", link: "/#" },
+    //           ],
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
+  ];
   return <React.Fragment>{menuItems}</React.Fragment>;
-};
-export default Navdata;
- */
-import React, { useEffect, useState } from 'react';
-import Router, { useRouter } from 'next/router';
-import { user } from 'Components/interface/user';
-const Navdata = () => {
-	const router = useRouter();
-	// state data
-	const [isAuth, setIsAuth] = useState(false);
-	const [isJobs, setIsJobs] = useState(false);
-	const [hrms, setHrms] = useState(false);
-	const [isPages, setIsPages] = useState(false);
-	const [isMultiLevel, setIsMultiLevel] = useState(false);
-	const [isVms, setIsVms] = useState(false);
-	const [isStats, setIsStats] = useState(false);
-	const [isActivity, setIsActivity] = useState(false);
-	const [isOrganisation, setIsOrganisation] = useState(false);
-	const [isEmployee, setIsEmployee] = useState(false);
-
-	const [isClient, setIsClient] = useState(false);
-	const [isFacility, setIsFacility] = useState(false);
-	const [user, setUser] = useState(false);
-	//  Authentication
-	const [isSignIn, setIsSignIn] = useState(false);
-	const [isSignUp, setIsSignUp] = useState(false);
-	const [isPasswordReset, setIsPasswordReset] = useState(false);
-	const [isPasswordCreate, setIsPasswordCreate] = useState(false);
-	const [isLockScreen, setIsLockScreen] = useState(false);
-	const [isLogout, setIsLogout] = useState(false);
-	const [isSuccessMessage, setIsSuccessMessage] = useState(false);
-	const [isVMSHrms, setIsVMSHRMS] = useState(false);
-	const [isPipeline, setIsPipeline] = useState(false);
-	const [isError, setIsError] = useState(false);
-	const [userObj, setUserobj] = useState<any>({});
-	//  Pages
-	const [isProfile, setIsProfile] = useState(false);
-
-	//  Multi Level
-	const [isLevel1, setIsLevel1] = useState(false);
-	const [isLevel2, setIsLevel2] = useState(false);
-	const [userdetails, setUserDetails] = useState<any>('');
-	const [isCurrentState, setIsCurrentState] = useState('');
-
-	function updateIconSidebar(e: any) {
-		if (e && e.target && e.target.getAttribute('sub-items')) {
-			const ul: any = document.getElementById('two-column-menu');
-			const iconItems: any = ul.querySelectorAll('.nav-icon.active');
-			let activeIconItems = [...iconItems];
-			activeIconItems.forEach((item) => {
-				item.classList.remove('active');
-				var id: any = item.getAttribute('sub-items');
-				var menusId = document.getElementById(id);
-				if (menusId) {
-					(menusId.parentElement as HTMLElement).classList.remove('show');
-				}
-			});
-			e.target.classList.add('active');
-		}
-	}
-
-	useEffect(() => {
-		if (localStorage.getItem('authUser')) {
-			const obj: any = JSON.parse(localStorage.getItem('authUser') || '');
-			setUserDetails(obj);
-		}
-		document.body.classList.remove('twocolumn-panel');
-		if (isCurrentState !== 'Auth') {
-			setIsAuth(false);
-		}
-		if (isCurrentState !== 'Pages') {
-			setIsPages(false);
-		}
-		if (isCurrentState !== 'MuliLevel') {
-			setIsMultiLevel(false);
-		}
-		if (isCurrentState === 'Dashboard') {
-			Router.push('/dashboard');
-			document.body.classList.add('twocolumn-panel');
-		}
-		if (isCurrentState === 'Widgets') {
-			Router.push('/widgets');
-			document.body.classList.add('twocolumn-panel');
-		}
-		if (isCurrentState === 'Calendar') {
-			Router.push('/calendar');
-			document.body.classList.add('twocolumn-panel');
-		}
-		if (isCurrentState === 'API Key') {
-			Router.push('/api-key');
-			document.body.classList.add('twocolumn-panel');
-		}
-		if (isCurrentState === 'Contact') {
-			Router.push('/contact');
-			document.body.classList.add('twocolumn-panel');
-		}
-		if (isCurrentState === 'Leaderboard') {
-			Router.push('/leaderboard');
-			document.body.classList.add('twocolumn-panel');
-		}
-		if (isCurrentState === 'Components') {
-			Router.push('https:hybrix-nextjs-components.vercel.app/');
-			document.body.classList.add('twocolumn-panel');
-		}
-		if (localStorage.getItem('currentrole')) {
-			const obj: any = JSON.parse(localStorage.getItem('currentrole') || '{}');
-			setUserobj(obj[0]);
-		}
-	}, [isCurrentState, isAuth, isPages, isMultiLevel]);
-	const menuItems: any = [
-		{
-			id: 'dashboard',
-			label: 'Dashboard',
-			icon: 'bi bi-speedometer2',
-			link: '/dashboard',
-			click: function (e: any) {
-				e.preventDefault();
-				setIsCurrentState('Dashboard');
-			},
-		},
-
-		{
-			label: 'HRMS',
-			isHeader: true,
-		},
-		{
-			id: 'user',
-			label: 'Users',
-			icon: 'bi bi-person-circle ',
-			link: '/#',
-			click: function (e: any) {
-				e.preventDefault();
-				setUser(!user);
-				setIsCurrentState('User');
-				updateIconSidebar(e);
-			},
-			stateVariables: user,
-			subItems: [
-				{
-					id: 'viewuser',
-					label: 'View-Users',
-					link: '/users/view-user',
-					click: function (e: any) {
-						e.preventDefault();
-						setIsSignUp(!isSignUp);
-					},
-					parentId: 'user',
-					stateVariables: isSignUp,
-				},
-			],
-		},
-
-		{
-			id: 'client',
-			label: 'Clients',
-			icon: 'bi bi-clipboard-data',
-			link: '/#',
-			click: function (e: any) {
-				e.preventDefault();
-				setIsClient(!isClient);
-				setIsCurrentState('Stats');
-				updateIconSidebar(e);
-			},
-			stateVariables: isClient,
-			subItems: [
-				{
-					id: 'viewClient',
-					label: 'View Client',
-					link: '/client/view-client',
-					click: function (e: any) {
-						e.preventDefault();
-						setIsSignIn(!isSignIn);
-					},
-					parentId: 'client',
-					stateVariables: isSignIn,
-				},
-			],
-		},
-	];
-
-	return <React.Fragment>{menuItems}</React.Fragment>;
 };
 export default Navdata;

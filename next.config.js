@@ -7,7 +7,6 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
-  images: { unoptimized: true },
   serverRuntimeConfig: {
     headers: {
       "Content-Security-Policy": "frame-ancestors 'none';",

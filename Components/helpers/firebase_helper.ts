@@ -1,4 +1,4 @@
-import firebase from "firebase/compat/app";
+import firebase from 'firebase/compat/app'
 
 // Add the Firebase products that you want to use
 import "firebase/compat/auth";
@@ -60,21 +60,21 @@ class FirebaseAuthBackend {
   /**
    * Login user with given details
    */
-  // loginUser = (email: any, password: any) => {
-  //   return new Promise((resolve, reject) => {
-  //     firebase
-  //       .auth()
-  //       .signInWithEmailAndPassword(email, password)
-  //       .then(
-  //         (user: any) => {
-  //           resolve(firebase.auth().currentUser);
-  //         },
-  //         (error: any) => {
-  //           reject(this._handleError(error));
-  //         }
-  //       );
-  //   });
-  // };
+  loginUser = (email: any, password: any) => {
+    return new Promise((resolve, reject) => {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(
+          (user: any) => {
+            resolve(firebase.auth().currentUser);
+          },
+          (error: any) => {
+            reject(this._handleError(error));
+          }
+        );
+    });
+  };
 
   /**
    * forget Password user with given details
@@ -119,18 +119,13 @@ class FirebaseAuthBackend {
   socialLoginUser = (data: any, type: any) => {
     let credential: any = {};
     if (type === "google") {
-      credential = firebase.auth.GoogleAuthProvider.credential(
-        data.idToken,
-        data.token
-      );
+      credential = firebase.auth.GoogleAuthProvider.credential(data.idToken, data.token);
     } else if (type === "facebook") {
       credential = firebase.auth.FacebookAuthProvider.credential(data.token);
     }
     return new Promise((resolve, reject) => {
       if (!credential) {
-        firebase
-          .auth()
-          .signInWithCredential(credential)
+        firebase.auth().signInWithCredential(credential)
           .then((user: any) => {
             resolve(this.addNewUserToFirestore(user));
           })
@@ -153,7 +148,7 @@ class FirebaseAuthBackend {
       email: profile.email,
       picture: profile.picture,
       createdDtm: firebase.firestore.FieldValue.serverTimestamp(),
-      lastLoginTime: firebase.firestore.FieldValue.serverTimestamp(),
+      lastLoginTime: firebase.firestore.FieldValue.serverTimestamp()
     };
     collection.doc(firebase.auth().currentUser?.uid).set(details);
     return { user, details };

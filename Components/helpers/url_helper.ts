@@ -1,38 +1,52 @@
-/* Live SSL */
-// export const hrms_api_host = "https://hrmsapi.midastech.org:8443";
-// export const job_api_host = "https://api.midastech.org/api";
-// export const redirect = "https://portal.midastech.org/auth/reset-password/";
+// LIVE;
+// export const baseURL = "http://18.204.165.219:9291/api/v1";
+// export const imagebaseURL = "http://18.204.165.219:9291/resources/";
 
-/* LIVE  */
-// export const hrms_api_host = "http://10.0.0.101:8077";
-// export const hrms_api_host = "http://localhost:9292";
-export const hrms_api_host = "https://real-back-tau.vercel.app";
+// // // LIVE;
+// export const baseURL = "https://api.mylavya.com/api/v1";
+export const imagebaseURL = "https://api.mylavya.com/resources/";
+export const baseURL = "https://real-back-tau.vercel.app";
 
-export const job_api_host = "http://34.230.215.187:9291/api";
-export const redirect = "http://uat.midastech.org/auth/reset-password/";
+// LOCAL;
+// export const baseURL = "http://192.168.1.15:9291/api/v1";
+// export const imagebaseURL = "http://192.168.1.15:9291/resources/";
 
+// export const baseURL = "http://192.168.1.13:9291/api/v1";
+// export const imagebaseURL = "http://192.168.1.13:9291/resources/";
 
-/* Dheeraj Sir */
-// export const redirect = "http://localhost:3000/auth/reset-password/";
-// export const job_api_host = "http://10.0.0.101:9292/api";
-// export const hrms_api_host = "http://44.213.229.250:8077";
+// export const baseURL = "http://192.168.1.20:9291/api/v1";
+// export const imagebaseURL = "http://192.168.1.20:9291/resources/";
 
-/* Own */
-// export const job_api_host = "http://localhost:9291/api";
-// export const hrms_api_host = "http://localhost:8077";
-// export const redirect = "http://localhost:3000/auth/reset-password/";
+// export const baseURL = "http://192.168.1.7:9291/api/v1";
+// export const imagebaseURL = "http://192.168.1.7:9291/resources/";
+
+// export const baseURL = "http://172.20.10.5:9291/api/v1";
+// export const imagebaseURL = "http://172.20.10.5:9291/resources/";
+
+// export const baseURL = "http://10.0.0.51:9291/api/v1";
+// export const imagebaseURL = "http://10.0.0.51:9291/resources/";
 
 //REGISTER
 export const POST_FAKE_REGISTER = "/post-fake-register";
 
+
+//TESTIMONIAL
+export const GET_ALL_TESTIMONIAL = "/testimonial/get-all-testimonial-for-admin";
+export const ADD_NEW_TESTIMONIAL = "/testimonial/create-testimonial";
+export const UPDATE_TESTIMOINAL_STATUS= "/testimonial/update-testimonial-status/";
+export const EDIT_TESTIMONIAL = "/testimonial/edit-testimonial/" ;
+export const DELETE_TESTIMONIAL = "/testimonial/delete-testimonial/"
+
+//VACATIONS
+export const DELETE_VACATION_BY_ID = "/vacation/delete-vacation-by-id/"
+export const GET_All_VACATIONS = "/vacation/get-all-vacations"
+
 //LOGIN
-export const POST_LOGIN = "/auth/login/CRM";
+export const POST_FAKE_LOGIN = "/post-fake-login";
 export const POST_FAKE_JWT_LOGIN = "/post-jwt-login";
-export const POST_RESET_ = "/api/v1/user";
 export const POST_FAKE_PASSWORD_FORGET = "/fake-forget-pwd";
 export const POST_FAKE_JWT_PASSWORD_FORGET = "/jwt-forget-pwd";
 export const SOCIAL_LOGIN = "/social-login";
-export const MANAGER_BY_ROLE = "/api/v1/user/getUsersByManager";
 
 //PROFILE
 export const POST_EDIT_JWT_PROFILE = "/post-jwt-profile";
@@ -45,6 +59,17 @@ export const GET_UPCOMMINGEVENT = "/upcommingevents";
 export const ADD_NEW_EVENT = "/add/event";
 export const UPDATE_EVENT = "/update/event";
 export const DELETE_EVENT = "/delete/event";
+
+//CONTACT FROM 
+export const GET_ALL_CONTACT_FORM = "/contact-form/get-all-contact"
+
+
+//SUBSCRIBE EMAIL 
+export const GET_ALL_SUBSCRIBE_MAILS = "/user-subscribe/get-all-subscribe-user";
+
+//RATING
+export const GET_ALL_RATING = "/rating/get-all-rating-for-admin";
+export const DELETE_REVIEW = "/rating/delete-rating/";
 
 // API Key
 export const GET_API_KEY = "/api-key";
@@ -70,82 +95,140 @@ export const GET_MONTHLY_DATA = "/monthly-data";
 export const GET_HALFYEARLY_DATA = "/halfyearly-data";
 export const GET_YEARLY_DATA = "/yearly-data";
 
-// All VMS CONFIG
-export const GET_ALL_VMS_CONFIG_DATA = "/jobAssignment/getAllVmsConfig";
-export const POST_ASSIGNED_VMS = "/jobAssignment/assignVMS";
-export const DELETE_VMS = `/jobAssignment/deleteVmsConfig/`;
 
-// ASSSIGNMENT
-export const POST_ASSIGNED_JOB = "/jobAssignment/assignJob";
-export const GET_ASSIGNED_JOBS_TO_ME = "/jobAssignment/allAssignedToMe";
-export const GET_ASSIGNED_JOBS_BY_ME = "/jobAssignment/allAssignedByManager";
-export const UNASSIGNED_JOBS = "/jobAssignment/unAssignManager";
-export const GET_ASSIGNED_JOBS_TO_TL = "/jobAssignment/allAssignmentByTl";
+/*  Category  */
+export const POST_NEW_CATEGORY = "/category/create-category";
+export const POST_NEW_SUB_CATEGORY = "/category/create-sub-category";
+export const GET_ALL_CATEGORY = "/category/get-all-categories";
+export const GET_ALL_SUB_CATEGORY_BY_CATID =
+  "/category/get-sub-category-by-cat-id";
+export const GET_ALL_SUB_CATEGORY = "/category/get-all-sub-category";
+export const GET_SUBCATEGORY_BY_ID = "/category/get-subcategory-by-id/";
+export const UPDATE_SUBCATEGORY_BY_ID = "/category/update-subcategory-by-id/";
+export const DELETE_SUBCATEGORY_BY_ID = "/category/delete-subcategory-by-id/";
+/*  Category  */
 
-// All Jobs CONFIG
-export const GET_ALL_JOBS = "/allvms/getAllFeeds";
+/* product */
+export const POST_NEW_PRODUCT = "/product/create-product";
+export const GET_ALL_PRODUCT = "/product/get-all-products-for-admin";
+export const UPDATE_STOCK = "/stock/update-qty";
+export const EDIT_PRODUCT = "/product/update-product-details";
+export const EDIT_PRODUCT_STATUS = "/product/update-product-status";
+/* product */
 
-// Pipeline CONFIG
-export const GET_ALL_PIPELINE = "/pipeline/getMatchingJobs";
-export const SAVE_PIPELINE = "/pipeline/savePipeline";
-export const UPLOAD_CSV = "/pipeline/upload";
-export const DOWNLOAD_CSV = "/pipeline/files/sampleFile";
-export const GET_ALL_PIPELINE_BY_USER = "/pipeline/getMatchingJobsByUsers";
-export const GET_DEGREE = "/allvms/getAllSpecialtyDegree";
-export const GET_ADMIN_PIPELINE = "/pipeline/getMatchingJobsByUsers";
-export const GET_EVERY_PIPELINE = "/pipeline/getAllPipelines";
-export const GET_ALL_MATCHING_JOBS = "/pipeline/getAllMatchingJobs";
+/* ORDER */
+export const GET_ALL_ORDERS = "/order/get-all-orders";
+export const UPDATE_ORDER = "/order/update-order-by-id";
+export const ASSIGN_ORDER = "/order/assign-to-partner";
+export const DEFINE_ROUTE = "/order/define-route/"
+/* ORDER */
 
-//Manager Data Config
-export const GET_MANAGER_DATA = "/api/v1/user/getUsersByManager";
+/* ORDER */
+export const GET_ALL_SUBSCRIPTION = "/order/get-order-by-status";
+/* ORDER */
 
-export const POST_ACCOUNT_JOBS = "/jobAssignment/allAssignedByAccountManagers";
+/* ORDER */
+export const GET_ALL_LOCATIONS = "/location/get-all-serving-locations";
+export const ADD_NEW_LOCATION = "/location/add-new-location";
+/* ORDER */
 
-// Client Jobs CONFIG
-export const GET_ALL_CLIENT = "/allvms/getAllOpenByVMSIdFlux";
+/* HUB */
+export const GET_ALL_HUB = "/hub/get-all-hubs";
+export const ADD_NEW_HUB = "/hub/create-new-hub";
+/* HUB */
 
-// Feed Stats CONFIG
-export const GET_FEED_STATS = "/allvms/getFeedUpdateBetweenDate";
+/* PARTNER */
+export const GET_ALL_PARTNER = "/partner/get-all-partners";
+export const ADD_NEW_PARTNER = "/partner/add-new-partner";
+export const UPDATE_PARTNER_GIVEN_AMOUNT_BY_ID = "/partner/update-partner-given-amount-by-id/"
+/* PARTNER */
 
-// CALCULATOR
-export const POST_CALC_RATES = "/travel/perdiem/byCityStateYear";
+/* CITY */
+export const GET_ALL_CITY = "/city/get-all-city";
+export const ADD_NEW_CITY = "/city/add-new-city";
+/* CITY */
 
-// Users Config
+/* CONTENT */
+export const GET_ALL_CONTENT = "/content/get-all-content";
+export const ADD_NEW_CONTENT = "/content/add-new-content";
+/* CONTENT */
+
+export const DETAILS_OF_GATEWAY = "/order/get-payment-details-by-id";
+
+export const CREATE_OFFER = "/offer/create-new-offer";
+export const GET_ALL_OFFER = "/offer/fetch-all-offer";
+
+export const UPLOAD_BANNER = "/banner/upload-banner-image";
+export const GET_ALL_BANNERS = "/banner/get-all-banners-for-admin";
+export const DELETE_BANNER = "/banner/delete-banner-by-id/"
+export const UPDATE_BANNER = "/banner/update-banner-by-id/"
+export const UPDATE_BANNER_STATUS = "/banner/update-banner-status/";
+
+//SILDERS
+export const GET_ALL_SLIDER = "/slider/get-all-sliders-for-admin";
+export const UPLOAD_SLIDER = "/slider/upload-slider-image";
+export const DELETE_SLIDER = "/slider/delete-slider-by-id/"
+export const UPDATE_SLIDER = "/slider/update-slider-by-id/"
+export const UPDATE_SLIDER_STATUS = "/slider/update-slider-status/";
+
+//OFFER HEADING
+export const CREATE_OFFER_HEADING = '/offer-heading/create-offer-heading';
+export const GET_ALL_OFFER_HEADING = '/offer-heading/get-all-offer-heading';
+export const EDIT_OFFER_HEADING = '/offer-heading/edit-offer-heading/'
+export const DELETE_OFFER_HEADING = '/offer-heading/delete-offer-heading/'
+
+export const CREATE_MEMBERSHIP = "/vip/membership/subscribe-new-membership";
+
+export const CREATE_NEW_MEMBERSHIP = "/vip/membership/create-new-membership";
+export const GET_ALL_MEMBERSHIP = "/vip/membership/get-membership";
+export const EDIT_MEMBERSHIP = "/vip/membership/edit-membership";
+
+export const EDIT_CATEGORY = "/category/edit-category-by-id";
+
+//recharge
+export const CREATE_NEW_OFFER = "/recharge/create-recharge-offer";
+export const GET_RECHARGE_OFFER = "/recharge/get-all-offer";
+export const EDIT_RECHARGE_OFFER = "/recharge/update-offer";
+
+//first time recharge
+export const CREATE_FIRST_TIME_RECHARGE = "/first-time-recharge/create-first-time-recharge-offer";
+export const GET_ALL_FIRST_TIME_RECHARGE = "/first-time-recharge/get-all-first-time-offer";
+export const EDIT_FIRST_TIME_RECHARGE = "/first-time-recharge/update-first-time-offer";
+export const DELETE_FIRST_TIME_RECHARGE = "/first-time-recharge/delete-by-id"
+export const CHANGE_STATUS_BY_ID = "/first-time-recharge/status-changestatusById-by-id"
+
+export const CHECK_WALLET_REQUEST =
+  "/recharge-via-cash/fetch-request-for-recharge";
+
+export const DELETELOCATION = "/location/delete-location/";
+export const UPDATELOCATION = "/location/update-location/";
+
+//Get User
+export const GETUSER = "/login/get-all-app-user";
+export const UPDATE_USER_WALLET = "/login/update-user-wallet/";
+
+
+//Vendor
+export const CREATE_NEW_VENDOR = "/vendor/add-vendor";
+export const GET_ALL_VENDORS = "/vendor/get-all-vendors"
+export const GET_VENDOR = "/vendor/get-vendor-by-id/"
+export const UPDATE_VENDOR = "/vendor/update-vendor-by-id/"
+export const DELETE_VENDOR = "/vendor/delete-vendor-by-id/"
+
+
+export const GET_TOTAL_SALE_WITH_VIP = "/accounting/total-sale-with-vip"
+export const GET_TOTAL_SALE_WITHOUT_VIP = "/accounting/total-sale-without-vip"
+export const GET_ALL_AMOUNT = "/accounting/total-amount-received-by-company"
+export const CREATE_PURCHASE = "/accounting/purchase-by-user"
+export const GET_ALL_PURCHAES = "/accounting/get-all-purchase-by-user"
+export const CREATE_EXPENSES = "/accounting/expenses"
+export const GET_ALL_EXPENSES = "/accounting/get-all-expenses"
+export const UPDATE_GIVEN_AMOUNT = "/accounting/update-given-amount-by-id/"
+
+
 export const GET_ALL_USER = "/auth/get-all-user/CRM";
-export const POST_NEW_USER = "/api/v1/user/register";
-export const EDIT_USER = "/api/v1/user/updateprofile";
-export const LOGIN_ACTIVITY = "/api/v1/user/getLoginStatsBwDates";
 
-// ROLES
-export const GET_ALL_ROLES = "/api/v1/user/allRoles";
+export const POST_LOGIN = "/auth/login/CRM";
 
-// Employee Config
-export const GET_ALL_EMPLOYEE = "/";
-export const POST_EMPLOYEE = "";
 
-// Organisation Config
-export const ORGANISATION = "/api/v1/organisation";
-
-// Employee Config
-export const EMPLOYEE = "/api/v1/employee";
-export const ADDEMPLOYEE = "/api/v1/employee/saveEmployee";
-export const POST_DOCUMENT = "/api/v1/employee/uploadFile";
-export const GET_DOCUMENT = "/api/v1/employee/getDocsByEmployeeId";
-export const GET_ACCESS_TOKEN = "/api/v1/employee//getAccessToken";
-export const DELETE_EMPLOYEE_DOCS = "/api/v1/employee/deleteEmployeeDocument";
-
-//VMS Config
-export const POST_VMS = "/api/v1/vms";
-
-//Client Config
 export const GET_ALL_QUERY = "/contact/get-all-queries/CRM";
-
-//Project Config
-export const PROJECT = "/api/v1/project";
-export const GET_PROJECT = "/api/v1/project/getProjectByEmployeeId";
-
-//Facility Config
-export const FACILITY = "/api/v1/facility";
-
-//Mail Verification
-export const MAIL = "/email/sendPasswordReset";

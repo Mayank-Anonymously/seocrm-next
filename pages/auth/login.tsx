@@ -1,10 +1,4 @@
-import React, {
-  ReactElement,
-  ReactNode,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 import Head from "next/head";
 import {
   Alert,
@@ -29,30 +23,46 @@ import { useSelector, useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 
+import {
+  loginUser,
+  socialLogin,
+  resetLoginFlag,
+} from "../../Components/slices/thunk";
+
 //import images
-import logoLightFull from "@assets/images/logob.png";
+import logoLightFull from "@assets/images/logo-light-full.png";
 import authEffect2 from "@assets/images/effect-pattern/auth-effect-2.png";
 import authEffect from "@assets/images/effect-pattern/auth-effect.png";
 import NonAuthLayout from "@common/Layout/NonAuthLayout";
 
-import { UserLogin, resetLoginFlag } from "Components/slices/auth/login/thunk";
-import { RootState } from "Components/slices";
-
-const Login = () => {
+const Login = (props: any) => {
   const dispatch: any = useDispatch();
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [passwordtype, setPasswordtype] = useState<boolean>(true);
+  const [userLogin, setUserLogin] = useState<any>([]);
 
-  const { error } = useSelector((state: RootState) => ({
+  const { user, error } = useSelector((state: any) => ({
+    user: state.Account.user,
     error: state.Login.error,
   }));
 
+  useEffect(() => {
+    if (user && user) {
+      setUserLogin({
+        email: user.email,
+        password: user.password,
+      });
+    }
+  }, [user]);
+
   const validation: any = useFormik({
+    // enableReinitialize : use this flag when initial values needs to be changed
     enableReinitialize: true,
+
     initialValues: {
-      email: "",
-      password: "",
+      email: userLogin.email || "admin@njhousing.com" || "",
+      password: userLogin.password || "123456" || "",
     },
     validationSchema: Yup.object({
       email: Yup.string().required("Please Enter Your Email"),
@@ -60,9 +70,10 @@ const Login = () => {
     }),
     onSubmit: (values) => {
       setLoading(true);
-      dispatch(UserLogin(values, router));
+      dispatch(loginUser(values, router));
     },
   });
+
   useEffect(() => {
     setTimeout(() => {
       dispatch(resetLoginFlag());
@@ -70,14 +81,43 @@ const Login = () => {
     }, 3000);
   }, [dispatch, error]);
 
-  if (error === null || error === undefined) {
-    // Handle the case when the Redux state is null or undefined
-    return <div>Loading...</div>; // or any other placeholder or loading state
-  }
+  const signIn = (res: any, type: any) => {
+    if (type === "google" && res) {
+      const postData = {
+        name: res.profileObj.name,
+        email: res.profileObj.email,
+        token: res.tokenObj.access_token,
+        idToken: res.tokenId,
+      };
+      dispatch(socialLogin(postData, type));
+    } else if (type === "facebook" && res) {
+      const postData = {
+        name: res.name,
+        email: res.email,
+        token: res.accessToken,
+        idToken: res.tokenId,
+      };
+      dispatch(socialLogin(postData, type));
+    }
+  };
+
+  //handleGoogleLoginResponse
+  const googleResponse = (response: any) => {
+    signIn(response, "google");
+  };
+
+  //handleTwitterLoginResponse
+  // const twitterResponse = e => {}
+
+  //handleFacebookLoginResponse
+  const facebookResponse = (response: any) => {
+    signIn(response, "facebook");
+  };
+
   return (
     <React.Fragment>
       <Head>
-        <title>Login | Midas - Jobs Portal</title>
+        <title>Login | Lavya -Admin </title>
       </Head>
       <section className="auth-page-wrapper py-5 position-relative d-flex align-items-center justify-content-center min-vh-100 bg-light">
         <Container>
@@ -90,7 +130,7 @@ const Login = () => {
                       <Card className="auth-card bg-primary h-100 border-0 shadow-none p-sm-3 overflow-hidden mb-0">
                         <Card.Body className="p-4 d-flex justify-content-between flex-column">
                           <div className="auth-image mb-3">
-                            <Image src={logoLightFull} alt="" height="46" />
+                            <Image src={logoLightFull} alt="" height="26" />
                             <Image
                               src={authEffect2}
                               alt=""
@@ -114,15 +154,15 @@ const Login = () => {
                               Start your journey with us.
                             </h3>
                             <p className="text-white-75 fs-15">
-                              It brings together your jobs, assignment,
-                              submissions and more
+                              It brings together your tasks, projects,
+                              timelines, files and more
                             </p>
                           </div>
                           <div className="text-center text-white-75">
                             <p className="mb-0">
-                              ©{new Date().getFullYear()} Midas. Crafted with{" "}
+                              ©{new Date().getFullYear()} Lavya. Crafted with{" "}
                               <i className="mdi mdi-heart text-danger"></i> by
-                              Midas Tech
+                              Themesbrand
                             </p>
                           </div>
                         </Card.Body>
@@ -137,7 +177,7 @@ const Login = () => {
                               Welcome Back !
                             </h5>
                             <p className="text-muted">
-                              Sign in to continue to Midas.
+                              Sign in to continue to Lavya.
                             </p>
                           </div>
                           {error && error ? (
@@ -156,12 +196,12 @@ const Login = () => {
                                   htmlFor="username"
                                   className="form-label"
                                 >
-                                  Email
+                                  Username
                                 </Form.Label>
                                 <Form.Control
                                   className="form-control"
                                   id="username"
-                                  placeholder="Enter email"
+                                  placeholder="Enter username"
                                   name="email"
                                   type="email"
                                   onChange={validation.handleChange}
@@ -184,12 +224,12 @@ const Login = () => {
 
                               <div className="mb-3">
                                 <div className="float-end">
-                                  {/* <Link
+                                  <Link
                                     href="/auth/forget-password"
                                     className="text-muted"
                                   >
                                     Forgot password?
-                                  </Link> */}
+                                  </Link>
                                 </div>
                                 <Form.Label
                                   className="form-label"
@@ -274,8 +314,8 @@ const Login = () => {
                                   </h5>
                                 </div>
                                 <div className="pt-2 hstack gap-2 justify-content-center">
-                                  {/* <FacebookLogin
-                                    appId={facebook.APP_ID}
+                                  <FacebookLogin
+                                    // appId={facebook.APP_ID}
                                     autoLoad={false}
                                     callback={facebookResponse}
                                     render={(renderProps: any) => (
@@ -288,11 +328,11 @@ const Login = () => {
                                         <i className="ri-facebook-fill fs-16" />
                                       </Button>
                                     )}
-                                  /> */}
+                                  />
                                   {/* <button type="button" className="btn btn-soft-primary btn-icon"><i className="ri-facebook-fill fs-16"></i></button> */}
                                   {/* <button type="button" className="btn btn-soft-danger btn-icon"><i className="ri-google-fill fs-16"></i></button> */}
 
-                                  {/* <GoogleLogin
+                                  <GoogleLogin
                                     clientId={
                                       "23144678283-oek7ncjmmrgkgmi2i56sc411gp71a8sp.apps.googleusercontent.com"
                                     }
@@ -308,7 +348,7 @@ const Login = () => {
                                     )}
                                     onSuccess={googleResponse}
                                     onFailure={() => {}}
-                                  /> */}
+                                  />
                                   <Button
                                     variant="soft-dark"
                                     type="button"

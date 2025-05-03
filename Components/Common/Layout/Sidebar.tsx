@@ -8,21 +8,15 @@ import VerticalLayout from "./VerticalLayout";
 import HorizontalLayout from "./HorizontalLayout";
 import TwoColumnLayout from "./TwoColumnLayout";
 
-import logosm from "../../assets/images/small.png";
-import logodark from "../../assets/images/logob.png";
-import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
-import Loader from "@common/Loader";
+import logosm from "../../assets/favicon.png";
+import logodark from "../../assets/logo.png";
+import logolight from "../../assets/logo.png";
 
 interface SidebarProps {
   layoutType: any;
 }
 
-
-
 const Sidebar = ({ layoutType }: SidebarProps) => {
-  const router = useRouter();
-
   useEffect(() => {
     var verticalOverlay = document.getElementsByClassName("vertical-overlay");
     if (verticalOverlay) {
@@ -51,33 +45,12 @@ const Sidebar = ({ layoutType }: SidebarProps) => {
     }
   };
 
-  var time = 3600 * 1000;
-  setTimeout(() => {
-    router.push("/auth/login");
-    localStorage.clear();
-  }, time);
-
   return (
     <React.Fragment>
       <div className="app-menu navbar-menu">
         <div className="navbar-brand-box">
-          <Link href="/" className="logo logo-dark">
-            <span className="logo-sm">
-              <Image src={logosm} alt="" height="26" />
-            </span>
-            <span className="logo-lg">
-              <Image src={logodark} alt="" height="46" priority={true} />
-            </span>
-          </Link>
+         
 
-          <Link href="/" className="logo logo-light">
-            <span className="logo-sm">
-              <Image src={logosm} alt="" height="26" />
-            </span>
-            <span className="logo-lg">
-              <Image src={logodark} alt="" height="46" />
-            </span>
-          </Link>
           <button
             onClick={addEventListenerOnSmHoverMenu}
             type="button"

@@ -1,9 +1,9 @@
 import "../Components/assets/scss/themes.scss";
-import React, { ReactElement, ReactNode, useEffect, useState } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import Head from "next/head";
 import { Provider } from "react-redux";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { wrapper } from "../Components/slices";
+
 import {
   AppContext,
   AppInitialProps,
@@ -11,7 +11,29 @@ import {
   AppProps,
 } from "next/app";
 import type { NextComponentType, NextPage } from "next";
-import { store } from "Components/slices";
+
+// Import Firebase Configuration file
+// import { initFirebaseBackend } from "Components/helpers/firebase_helper";
+
+// const firebaseConfig = {
+//   apiKey: process.env.NEXT_PUBLIC_APIKEY,
+//   authDomain: process.env.NEXT_PUBLIC_AUTHDOMAIN,
+//   databaseURL: process.env.NEXT_PUBLIC_DATABASEURL,
+//   projectId: process.env.NEXT_PUBLIC_PROJECTID,
+//   storageBucket: process.env.NEXT_PUBLIC_STORAGEBUCKET,
+//   messagingSenderId: process.env.NEXT_PUBLIC_MESSAGINGSENDERID,
+//   appId: process.env.NEXT_PUBLIC_APPID,
+//   measurementId: process.env.NEXT_PUBLIC_MEASUREMENTID,
+// };
+
+// // init firebase backend
+// initFirebaseBackend(firebaseConfig);
+
+// Fake backend
+import fakeBackend from "Components/helpers/AuthType/fakeBackend";
+
+// Activating fake backend
+fakeBackend();
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -20,12 +42,12 @@ type NextPageWithLayout = NextPage & {
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
-
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
   Component,
   pageProps,
   ...rest
 }: AppPropsWithLayout) => {
+  const { store } = wrapper.useWrappedStore(rest);
   const getLayout = Component.getLayout || ((page) => page);
 
   return (
@@ -35,16 +57,12 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-        <title>Midas Job Portal</title>
-      </Head>
 
-      <React.StrictMode>
-        <Provider store={store}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            {getLayout(<Component {...pageProps} />)}
-          </LocalizationProvider>
-        </Provider>
-      </React.StrictMode>
+        <title>Lavya | Next js & Admin Dashboard </title>
+      </Head>
+      <Provider store={store}>
+        {getLayout(<Component {...pageProps} />)}
+      </Provider>
     </>
   );
 };

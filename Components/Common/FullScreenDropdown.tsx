@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
 
 const FullScreenDropdown = () => {
 
@@ -49,16 +48,15 @@ const FullScreenDropdown = () => {
     return (
         <React.Fragment>
             <div className="ms-1 header-item d-none d-sm-flex">
-                <Button variant='light'
+                <button
                     onClick={toggleFullscreen}
                     type="button"
                     className="btn btn-icon btn-topbar btn-ghost-dark rounded-circle"
                 >
                     <i className="bi bi-arrows-fullscreen fs-16"></i>
-                </Button>
+                </button>
             </div>
         </React.Fragment>
     );
-};
-
+    }
 export default FullScreenDropdown;

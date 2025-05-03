@@ -1,25 +1,23 @@
-import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import React from "react";
+import { Col, Container, Row } from "react-bootstrap";
 
 const Footer = () => {
-    return (
-        <React.Fragment>
-            <footer className="footer">
-                <Container fluid={true}>
-                    <Row>
-                        <Col sm={6}>
-                            {new Date().getFullYear()} © Midas.
-                        </Col>
-                        <Col sm={6}>
-                            <div className="text-sm-end d-none d-sm-block">
-                                Design & Develop by Midas
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </footer>
-        </React.Fragment >
-    );
-}
+  return (
+    <React.Fragment>
+      <footer className="footer">
+        <Container fluid={true}>
+          <Row>
+            <Col sm={6}>{new Date().getFullYear()} © Lavya.</Col>
+            <Col sm={6}>
+              <div className="text-sm-end d-none d-sm-block">
+                Design & Develop by Themesbrand
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </footer>
+    </React.Fragment>
+  );
+};
 
 export default Footer;

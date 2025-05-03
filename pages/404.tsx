@@ -5,7 +5,7 @@ import NonAuthLayout from "@common/Layout/NonAuthLayout";
 import { Card, Col, Container, Row } from "react-bootstrap";
 
 //import images
-import logoLightFull from "@assets/images/logob.png";
+import logoLightFull from "@assets/images/logo-light-full.png";
 import authEffect2 from "@assets/images/effect-pattern/auth-effect-2.png";
 import authEffect from "@assets/images/effect-pattern/auth-effect.png";
 import error400 from "@assets/images/error400.png";
@@ -16,7 +16,7 @@ const Error404Basic = () => {
   return (
     <React.Fragment>
       <Head>
-        <title>404 Error Basic | Midas - Jobs Portal</title>
+        <title>404 Error Basic | Lavya -Admin </title>
       </Head>
       <section className="auth-page-wrapper py-5 position-relative d-flex align-items-center justify-content-center min-vh-100 bg-light">
         <Container>
@@ -58,9 +58,9 @@ const Error404Basic = () => {
                           </div>
                           <div className="text-center text-white-75">
                             <p className="mb-0">
-                              © {new Date().getFullYear()} Midas. Crafted with{" "}
+                              © {new Date().getFullYear()} Lavya. Crafted with{" "}
                               <i className="mdi mdi-heart text-danger"></i> by
-                              Midas Tech
+                              Themesbrand
                             </p>
                           </div>
                         </Card.Body>
