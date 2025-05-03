@@ -66,31 +66,7 @@ const ViewClient = () => {
 		},
 		{
 			name: 'Action',
-			cell: (row: any) => (
-				<>
-					{currentRole.role === 'SUPERADMIN' && (
-						<span
-							className='cursor-pointer'
-							title='Delete'
-							onClick={() => {
-								Swal.fire({
-									title: 'Delete Query?',
-									text: 'Are you sure you want to delete this record?',
-									showCancelButton: true,
-									showCloseButton: true,
-								}).then((results) => {
-									if (results.isConfirmed) {
-										// dispatch(deleteClient(row._id));
-									}
-								});
-							}}>
-							<i
-								style={{ fontSize: '18px', color: 'red' }}
-								className='bi bi-trash'></i>
-						</span>
-					)}
-				</>
-			),
+			cell: (row: any) => <></>,
 			ignoreRowClick: true,
 			allowOverflow: true,
 			button: true,
@@ -98,11 +74,6 @@ const ViewClient = () => {
 	];
 
 	useEffect(() => {
-		const roleData = localStorage.getItem('currentrole');
-		if (roleData) {
-			const parsedRole = JSON.parse(roleData);
-			setCurrentRole(parsedRole[0] || {});
-		}
 		dispatch(fetchQueries());
 	}, [dispatch]);
 
