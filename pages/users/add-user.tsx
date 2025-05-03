@@ -55,14 +55,8 @@ const AddUser = () => {
 		onSubmit: (values) => {
 			formik.resetForm();
 			// console.log(values);
-			dispatch(AddNewUser(values, router));
 		},
 	});
-
-	useEffect(() => {
-		dispatch(fetchAllRoles());
-		dispatch(fetchAllUser());
-	}, []);
 
 	if (isLoading) {
 		return (

@@ -53,15 +53,8 @@ const EditUser = (props: any) => {
 		}),
 		onSubmit: (values) => {
 			formik.resetForm();
-			dispatch(EditNewUser(values, router));
 		},
 	});
-
-	useEffect(() => {
-		dispatch(fetchAllRoles());
-		dispatch(fetchAllUser());
-	}, []);
-	console.log(selectedRow);
 
 	if (isLoading) {
 		return 'Wait';

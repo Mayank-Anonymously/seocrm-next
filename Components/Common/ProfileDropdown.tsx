@@ -25,7 +25,6 @@ const ProfileDropdown = () => {
 			const role = JSON.parse(localStorage.getItem('currentrole') || '');
 			setusername(obj);
 			setRole(role[0]);
-			dispatch(fetchAllUser());
 			setusernamefirst(obj.fullName.split('')[0]);
 		}
 	}, []);
