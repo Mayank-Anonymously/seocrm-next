@@ -197,15 +197,6 @@ const EditUser = (props: any) => {
 									onBlur={formik.handleBlur}
 									name='roles'>
 									<option>Open this select menu</option>
-									{roleslist.map((item: any) => {
-										return (
-											<option
-												key={item.id}
-												value={JSON.stringify(item)}>
-												{item.role}
-											</option>
-										);
-									})}
 								</select>
 								<span className='text-danger'>
 									{formik.touched.roles && formik.errors.roles ? (
@@ -229,12 +220,6 @@ const EditUser = (props: any) => {
 										onBlur={formik.handleBlur}
 										name='manager'>
 										<option selected>Open this select menu</option>
-
-										{rolesArray
-											.filter((ite: any) => ite.roles === 'TEAMLEAD')
-											.map((item: any) => {
-												return <option value={item.id}>{item.fullName}</option>;
-											})}
 									</select>
 								</Col>
 							) : null}
@@ -256,12 +241,6 @@ const EditUser = (props: any) => {
 										onBlur={formik.handleBlur}
 										name='manager'>
 										<option selected>Open this select menu</option>
-
-										{rolesArray
-											.filter((ite: any) => ite.roles === 'ACCOUNTMANAGER')
-											.map((item: any) => {
-												return <option value={item.id}>{item.fullName}</option>;
-											})}
 									</select>
 								</Col>
 							) : null}
@@ -282,12 +261,6 @@ const EditUser = (props: any) => {
 										onBlur={formik.handleBlur}
 										name='manager'>
 										<option selected>Open this select menu</option>
-
-										{rolesArray
-											.filter((ite: any) => ite.roles === 'GENERALMANAGER')
-											.map((item: any) => {
-												return <option value={item.id}>{item.fullName}</option>;
-											})}
 									</select>
 								</Col>
 							) : null}
@@ -311,15 +284,6 @@ const EditUser = (props: any) => {
 									name='status'>
 									<option>Current : {selectedRow.status}</option>
 									<option>Open this select menu</option>
-									{status.map((item: any) => {
-										return (
-											<option
-												key={item.id}
-												value={item.value}>
-												{item.status}
-											</option>
-										);
-									})}
 								</select>
 								<span className='text-danger'>
 									{formik.touched.roles && formik.errors.roles ? (

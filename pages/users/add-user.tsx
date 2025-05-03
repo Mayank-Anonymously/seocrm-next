@@ -224,15 +224,6 @@ const AddUser = () => {
 									onBlur={formik.handleBlur}
 									name='roles'>
 									<option selected>Open this select menu</option>
-									{roleslist.map((item: any) => {
-										return (
-											<option
-												key={item.id}
-												value={JSON.stringify(item)}>
-												{item.role}
-											</option>
-										);
-									})}
 								</select>
 								<span className='text-danger'>
 									{formik.touched.roles && formik.errors.roles ? (
@@ -256,14 +247,6 @@ const AddUser = () => {
 										onBlur={formik.handleBlur}
 										name='manager'>
 										<option selected>Open this select menu</option>
-
-										{rolesArray
-											.filter(
-												(ite: any) => ite.roles === '658472f94b18126ca69a4925'
-											)
-											.map((item: any) => {
-												return <option value={item.id}>{item.fullName}</option>;
-											})}
 									</select>
 								</Col>
 							) : null}
@@ -285,14 +268,6 @@ const AddUser = () => {
 										onBlur={formik.handleBlur}
 										name='manager'>
 										<option selected>Open this select menu</option>
-
-										{rolesArray
-											.filter(
-												(ite: any) => ite.roles === '658472f94b18126ca69a4927'
-											)
-											.map((item: any) => {
-												return <option value={item.id}>{item.fullName}</option>;
-											})}
 									</select>
 								</Col>
 							) : null}

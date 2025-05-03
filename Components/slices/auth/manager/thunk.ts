@@ -47,9 +47,7 @@ export const AccountData = async (dispatch: any, objArray: any) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: {
-        accountManagers: objArray.map((item: any) => {
-          return item.id;
-        }),
+        accountManagers: []
       },
     };
     const fetch_api: any = axios.request(options);

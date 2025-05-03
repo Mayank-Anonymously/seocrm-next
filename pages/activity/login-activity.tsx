@@ -1,19 +1,13 @@
 import React, { ReactElement, useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
 import Layout from '@common/Layout';
-import { Material } from '@common/Material_Table';
-import { MRT_ColumnDef } from 'material-react-table';
 import { Box, Button, Stack } from '@mui/material';
 import moment from 'moment';
-import { Jobs } from 'Components/interface/jobs';
 import { useDispatch, useSelector } from 'react-redux';
-import Loader from '@common/Loader';
 import { DatePicker } from '@mui/x-date-pickers';
 import { Container } from 'react-bootstrap';
-import Loader2 from '@common/Loader2';
 import DataTable from 'react-data-table-component';
 import Custom_Filter from '@common/utils/filter/filter_utils';
-import { LAYOUT_MODE_TYPES } from '../../Components/Common/constants/layout';
 import Breadcrumb from '@common/Breadcrumb';
 
 const LoginActivity = () => {

@@ -7,20 +7,8 @@ import CountUp from 'react-countup';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, CircularProgress } from '@mui/material';
-import Loader from '@common/Loader';
-import { MRT_ColumnDef } from 'material-react-table';
-import { Jobs } from 'Components/interface/jobs';
-import moment from 'moment';
-import sampleJobs from '../Components/Common/sampleJobs';
-import DashBoardTable from '@common/DashboardTable';
-import DataTable from 'react-data-table-component';
+
 import banner from '../Components/assets/images/bannerimg.jpg';
-import BarCharts from '@component/index';
-import ZoomIntegrationPage from '@common/ZoomIntegrationPage';
-import IncrementalDataComponent from 'pages/PipelinesforGrid';
-import axios, { AxiosResponse } from 'axios';
-import { from, Observable, of, Subscription } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
 
 const Dashboard = (props: any) => {
 	const dispatch: any = useDispatch();
@@ -46,16 +34,7 @@ const Dashboard = (props: any) => {
 		}
 	}, []);
 
-	const openFilterJob =
-		jobdata.length !== 0
-			? jobdata
-					.filter(
-						(item: any) =>
-							item.StatusString === 'Open' || item.StatusString === 'O'
-					)
-					.map((ite: any) => ite)
-			: [];
-
+	const openFilterJob = [];
 	return (
 		<React.Fragment>
 			<Head>
@@ -122,17 +101,7 @@ const Dashboard = (props: any) => {
 							</div>
 						</Card>
 					</Col>
-					{/* {loading === true ? (
-            <div>
-              <Loader />
-            </div>
-          ) : (
-            <>
-              {jobdata.map((item: any) => {
-                return <div key={item.id}>{item.SourceID}</div>;
-              })}
-            </>
-          )} */}
+
 					<Col
 						xl={4}
 						md={4}>
